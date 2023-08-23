@@ -1,0 +1,32 @@
+/* Extra large devices (large desktops) */
+/* No media query since the extra-large breakpoint has no upper bound on its width */
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 580px) {
+  body {
+    text-align: center;
+  }
+  header {
+    position: relative;
+    background: #000;
+  }
+  .section--main {
+    height: auto;
+    padding: 4rem 0;
+  }
+  .search-box {
+    width: 100%;
+  }
+}
