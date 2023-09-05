@@ -18,13 +18,14 @@ use Session;
 
 class AdminController extends Controller
 {
-    
+
    public function dashboard(Request $request)
     {
         // Session::put('link', 'asas');
         //   Session::save();
-
-       return view('admin/dashboard');
+        $user_id = Auth::user()->id;
+        $user = User::where('id',$user_id)->first();
+       return view('admin/dashboard',compact('user'));
     }
 
 

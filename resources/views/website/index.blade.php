@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="{{asset('website_assets/css/owl.carousel.min.css')}}">
         <!-- main css -->
         <link rel="stylesheet" href="{{asset('website_assets/css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.css')}}" />
     </head>
     <style>
         .header{
@@ -89,9 +90,14 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav m-auto">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="index.html">Homepage</a>
+                                            <a class="nav-link active" href="{{route('home_page')}}">Homepage</a>
                                         </li>
+                                        @if(Auth::user())
                                         <li class="nav-item">
+                                            <a class="nav-link active" href="{{route('dashboard')}}">Dashbaord</a>
+                                        </li>
+                                        @endif
+                                        {{-- <li class="nav-item">
                                             <a class="nav-link" href="about.html">About us</a>
                                         </li>
                                         <li class="nav-item">
@@ -112,17 +118,25 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="contact.html">Contact</a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
                             </nav>
                         </div>
                     </div>
+                    @if(Auth::user())
                     <div class="col-xl-3 col-lg-3 d-xl-flex d-lg-flex d-none align-items-center justify-content-end">
-                        <a href="{{route('user-login')}}" class="btn-pok mid">
-                            play lottery <i class="fa-solid fa-angle-right"></i>
+                        <a href="{{route('logout')}}" class="btn-pok mid">
+                            Log out
                         </a>
                     </div>
+                    @else
+                    <div class="col-xl-3 col-lg-3 d-xl-flex d-lg-flex d-none align-items-center justify-content-end">
+                        <a href="{{route('user-login')}}" class="btn-pok mid">
+                            Login
+                        </a>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -184,6 +198,7 @@
                                         <img src="{{asset('website_assets/img/lottery/euro-jackpot.png')}}" alt="">
                                     </span>
                                     <span class="lottery-name">{{$item->lottery->name}}</span>
+                                    <span class="lottery-set-id" style="display: none">{{$item->id}}</span>
                                 </a>
                             </li>
                             @endforeach
@@ -213,6 +228,7 @@
                                 <div class="tab-pane fade show active" id="pills-numbers" role="tabpanel" aria-labelledby="pills-numbers-tab">
                                     <form action="{{route('hit_me')}}" method="GET">
                                             <input type="hidden" value="urwashi" name="lottery_name" id="my_name" class="part-lottery-info">
+                                            <input type="hidden" value="" name="lottery_set_id" id="lottery_set_id" class="lottery-set-id">
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-sm-4">
@@ -537,78 +553,6 @@
         </div>
         <!-- lottery end -->
 
-        <!-- about begin -->
-        <div class="about">
-            <img src="{{asset('website_assets/img/bg-shape/bg-shape-3.png')}}" alt="" class="bg-shape-3">
-            <img src="{{asset('website_assets/img/bg-shape/bg-shape-4.png')}}" alt="" class="bg-shape-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 d-xl-flex d-lg-flex d-block align-items-end justify-content-end">
-                        <div class="part-img">
-                            <img class="main-img" src="{{asset('website_assets/img/about/about-img.png')}}" alt="">
-                            <img class="bg-img" src="{{asset('website_assets/img/about/img-2.png')}}" alt="">
-                            <img class="shape-img" src="{{asset('website_assets/img/about/img-1.png')}}" alt="">
-                            <img src="{{asset('website_assets/img/about/ball-1.png')}}" alt="" class="ball-1">
-                            <img src="{{asset('website_assets/img/about/ball-2.png')}}" alt="" class="ball-2">
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-8">
-                        <div class="about-text">
-                            <div class="section-title for-about-section">
-                                <h3 class="sub-title">About us</h3>
-                                <h2 class="title">We provide best Mega jackpot</h2>
-                            </div>
-                            <div class="part-bottom">
-                                <div class="part-statics">
-                                    <div class="single-statics">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/about/icon-1.png')}}" alt="">
-                                        </div>
-                                        <div class="part-txt">
-                                            <span class="number">25.3k</span>
-                                            <span class="text">players</span>
-                                        </div>
-                                    </div>
-                                    <div class="single-statics">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/about/icon-2.png')}}" alt="">
-                                        </div>
-                                        <div class="part-txt">
-                                            <span class="number">46+</span>
-                                            <span class="text">lotteries</span>
-                                        </div>
-                                    </div>
-                                    <div class="single-statics">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/about/icon-3.png')}}" alt="">
-                                        </div>
-                                        <div class="part-txt">
-                                            <span class="number">270+</span>
-                                            <span class="text">jackpot</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="part-descr">
-                                    <p>Problem set compensation the harmonics, understood.
-                                        Hundreds times, of until they employed sure a behind boundless their for
-                                        boss's the certainly and gilded form of tend every of better an over when of
-                                        than an are until time. <span class="txt-bold">Would of impenetrable</span>
-                                        just the out diesel as it near at that.
-                                    </p>
-                                    <ul>
-                                        <li>He of his in its price always and feedback of films.</li>
-                                        <li>towards sight as not and each and, good.</li>
-                                        <li>tone, the of preparations never a even viable a.</li>
-                                    </ul>
-                                    <a href="about.html" class="btn-pok">Know more <i class="fa-solid fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- about end -->
 
         <!-- cta begin -->
         <div class="cta">
@@ -628,246 +572,6 @@
             </div>
         </div>
         <!-- cta end -->
-
-        <!-- working process begin -->
-        <!-- <div class="working-process">
-            <img src="{{asset('website_assets/img/bg-shape/bg-shape-3.png')}}" alt="" class="bg-shape-3">
-            <img src="{{asset('website_assets/img/bg-shape/wp-shape-2.png')}}" alt="" class="wp-bg-shape-2">
-            <img src="{{asset('website_assets/img/bg-shape/wp-shape-3.png')}}" alt="" class="wp-bg-shape-3">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-8">
-                        <div class="section-title">
-                            <h3 class="sub-title">How it works</h3>
-                            <h2 class="title">easiest way to picking a number</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="single-process">
-                            <div class="part-icon">
-                                <img src="{{asset('website_assets/img/working-process/icon-1.png')}}" alt="">
-                            </div>
-                            <div class="part-text">
-                                <span class="step-number">1.</span>
-                                <span class="step-title">Set a budget.</span>
-                                <p>Playing the lottery is gambling, so keep it fun by treating it as part of your entertainment budget.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="single-process pp-2">
-                            <div class="part-text">
-                                <span class="step-title">Choose your lottery.</span>
-                                <p>There are 5 exciting draw-based jackpot you can try one or all of them.
-                                    like powerball etc.</p>
-                                <span class="step-number two">2.</span>
-                            </div>
-                            <div class="part-icon">
-                                <img src="{{asset('website_assets/img/working-process/icon-2.png')}}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="single-process">
-                            <div class="part-icon">
-                                <img src="{{asset('website_assets/img/working-process/icon-3.png')}}" alt="">
-                            </div>
-                            <div class="part-text">
-                                <span class="step-number">3.</span>
-                                <span class="step-title">Pick your numbers.</span>
-                                <p>Since it’s all by chance, enjoy picking your numbers or seeing what the lottery terminal generates.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="single-process pp-2">
-                            <div class="part-text">
-                                <span class="step-title">Check your numbers.</span>
-                                <p>If you are a winner, claim your prize: be sure to visit a retailer before your prize expires in 12 months.</p>
-                                <span class="step-number four">4.</span>
-                            </div>
-                            <div class="part-icon">
-                                <img src="{{asset('website_assets/img/working-process/icon-4.png')}}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- working process end -->
-
-        <!-- feature begin -->
-        <!-- <div class="feature">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-5 col-lg-8 col-md-8">
-                        <div class="part-left">
-                            <div class="section-title">
-                                <h3 class="sub-title">Why we are best</h3>
-                                <h2 class="title">We are proud to provide best services to our clients</h2>
-                            </div>
-                            <div class="part-img">
-                                <img class="main-img" src="{{asset('website_assets/img/feature/feature-img.png')}}" alt="">
-                                <img class="bg-img" src="{{asset('website_assets/img/about/img-2.png')}}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-7 col-lg-12">
-                        <div class="feature-list">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-feature">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/feature/icon-1.png')}}" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <span class="title">SSL security layer</span>
-                                            <p>it's the standard technology for keeping an internet connection secure and safeguarding any sensitive.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-feature">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/feature/icon-2.png')}}" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <span class="title">Quick Notifications</span>
-                                            <p>When you’ve successfully matched enough numbers to win a prize, we notify you via email and/or SMS</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-feature">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/feature/icon-3.png')}}" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <span class="title">No Lost Tickets</span>
-                                            <p>Since it’s all by chance, enjoy picking your numbers or seeing what the lottery terminal generates.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-feature">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/feature/icon-4.png')}}" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <span class="title">No Long Lines</span>
-                                            <p>Since it’s all by chance, enjoy picking your numbers or seeing what the lottery terminal generates.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-feature">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/feature/icon-5.png')}}" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <span class="title">Secure Payments</span>
-                                            <p>Since it’s all by chance, enjoy picking your numbers or seeing what the lottery terminal generates.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-feature">
-                                        <div class="part-icon">
-                                            <img src="{{asset('website_assets/img/feature/icon-6.png')}}" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <span class="title">24/7 friendly support</span>
-                                            <p>Since it’s all by chance, enjoy picking your numbers or seeing what the lottery terminal generates.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- feature end -->
-
-        <!-- testimonial begin -->
-        <div class="testimonial">
-            <div class="bg-shape-1">
-                <img src="{{asset('website_assets/img/bg-shape/bg-shape-1.png')}}" alt="">
-            </div>
-            <img src="{{asset('website_assets/img/bg-shape/bg-shape-3.png')}}" alt="" class="bg-shape-3">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-8">
-                        <div class="section-title">
-                            <h3 class="sub-title">testimonials</h3>
-                            <h2 class="title">client’s valuable feedback</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-carousel owl-carousel owl-theme">
-                    <div class="single-testimonial">
-                        <div class="part-user-info">
-                            <span class="user-name">ruhio S albert</span>
-                            <span class="lottery-category">MagaMill. Winner</span>
-                            <span class="winning-date">( apr - 2022 )</span>
-                        </div>
-                        <div class="user-img-cover">
-                            <div class="part-img">
-                                <img src="{{asset('website_assets/img/testimonial/user-1.png')}}" alt="">
-                            </div>
-                        </div>
-                        <div class="part-feedback">
-                            <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the
-                            lottery terminal generates Since it’s all by chance.
-                            <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
-                        </p>
-                        </div>
-                    </div>
-                    <div class="single-testimonial">
-                        <div class="part-user-info">
-                            <span class="user-name">Leah Stanley</span>
-                            <span class="lottery-category">Powerball. Winner</span>
-                            <span class="winning-date">( Jan - 2022 )</span>
-                        </div>
-                        <div class="user-img-cover">
-                            <div class="part-img">
-                                <img src="{{asset('website_assets/img/testimonial/user-2.png')}}" alt="">
-                            </div>
-                        </div>
-                        <div class="part-feedback">
-                            <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the
-                            lottery terminal generates Since it’s all by chance.
-                            <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
-                        </p>
-                        </div>
-                    </div>
-                    <div class="single-testimonial">
-                        <div class="part-user-info">
-                            <span class="user-name">Megan Clayton</span>
-                            <span class="lottery-category">US Lotto. Winner</span>
-                            <span class="winning-date">( Dec - 2021 )</span>
-                        </div>
-                        <div class="user-img-cover">
-                            <div class="part-img">
-                                <img src="{{asset('website_assets/img/testimonial/user-3.png')}}" alt="">
-                            </div>
-                        </div>
-                        <div class="part-feedback">
-                            <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the
-                            lottery terminal generates Since it’s all by chance.
-                            <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- testimonial end -->
 
         <!-- footer begin -->
         <div class="footer">
@@ -962,6 +666,24 @@
         <script src="{{asset('website_assets/js/main.js')}}"></script>
         <!-- lottery js initialize -->
         <script src="{{asset('website_assets/js/lotteries-initialization.js')}}"></script>
+        <script src="{{asset('website_assets/js/lotteries-initialization.js')}}"></script>
+        <script src="{{asset('assets/vendor/libs/toastr/toastr.js')}}"></script>
+        <script src="{{asset('assets/js/ui-toasts.js')}}"></script>
+        <script>
+
+            var type = "{{ Session::get('type') }}";
+              switch (type) {
+                  case 'success':
+                      toastr.success("{{ Session::get('message') }}");
+
+                      break;
+
+                  case 'error':
+                      toastr.error("{{ Session::get('message') }}");
+                      break;
+
+              }
+        </script>
     </body>
 
 <!-- Mirrored from iamubaidah.com/html/poklotto/poklotto/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 21 Jul 2023 13:48:23 GMT -->

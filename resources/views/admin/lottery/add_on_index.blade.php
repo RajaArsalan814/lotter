@@ -30,18 +30,24 @@
     <table class=" table border-top">
       <thead>
         <tr>
+        <th>id</th>
           <th>Name</th>
           <th>Start Date</th>
           <th>End Date</th>
+          <th>Win</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         @if(count($lottery)>0)
         @foreach($lottery as $item)
         <tr>
+            <td>{{$item->id}}</td>
           <td>{{$item->lottery->name}}</td>
           <td>{{$item->start_date}}</td>
           <td>{{$item->end_date}}</td>
+          <td>{{$item->number_win}}</td>
+          <td><a href="{{route('lottery.lottery_set_edit',['id'=>$item->id])}}">Edit</a></td>
         </tr>
         @endforeach
         @endif

@@ -5,7 +5,7 @@ $(document).ready(function($){
 
     $(singleNum).on('click', function(){
         var singleNumLength = $('.number-box.common').find('.single-number.selected').length;
-        
+
         var this_btn_number = parseInt($(this).text());
         // alert(this_btn_number);
         var c=[];
@@ -41,7 +41,7 @@ $(document).ready(function($){
         }
     });
 
-    // clear all selected number 
+    // clear all selected number
     var all_Single_Number = $('.number-box').find('.single-number');
     var all_Result_Number = $('.result-number-palate');
 
@@ -50,7 +50,7 @@ $(document).ready(function($){
         all_Single_Number.removeClass('selected');
         all_Single_Number.removeClass('special');
     }
-    
+
     function randomNumberGenerate() {
         let singleRandomNumberTo8 = Math.floor(Math.random() * (8 - 1 + 1) + 1);
         let singleRandomNumberTo16 = Math.floor(Math.random() * (16 - 9 + 1) + 9);
@@ -68,7 +68,7 @@ $(document).ready(function($){
             $('#' + singleRandomNumberTo32).addClass('selected');
             $('#' + singleRandomNumberTo40).addClass('selected');
         });
-        
+
         $('.result-number-palate').append("<button class='single-number selected' id='" + singleRandomNumberTo8 + "'>" + $("#" + singleRandomNumberTo8).text() + "</button>");
         $('.result-number-palate').append("<button class='single-number selected' id='" + singleRandomNumberTo16 + "'>" + $("#" + singleRandomNumberTo16).text() + "</button>");
         $('.result-number-palate').append("<button class='single-number selected' id='" + singleRandomNumberTo24 + "'>" + $("#" + singleRandomNumberTo24).text() + "</button>");
@@ -92,7 +92,7 @@ $(document).ready(function($){
     var single_lottery = $('.lotteries-selection-menu').find('ul').find('li');
     function logoChange(element) {
         var active_lottery_logo = $(element).find('.lottery-icon').find('img').attr('src');
-        
+
         $('.selected-lottery-logo').find('img').attr('src', active_lottery_logo);
     }
 
@@ -103,12 +103,15 @@ $(document).ready(function($){
                 $(this).parent().siblings().find('.single-lottery-item').removeClass('active');
                 $(this).addClass('active');
             }
-            
+
             logoChange($(this));
 
             var active_lottery_name = $(this).find('.lottery-name').text();
+            var lottery_set_id = $(this).find('.lottery-set-id').text();
             document.getElementById('my_name').value=active_lottery_name;
+            document.getElementById('lottery_set_id').value=lottery_set_id;
             $('.part-lottery-info').find('.lottery-name').text(active_lottery_name);
+            $('.lottery-set-id').find('.lottery-set-id').text(active_lottery_name);
             clearAllNumbers();
             randomNumberGenerate();
         });

@@ -13,4 +13,9 @@ class LotteryPlace extends Model
     {
         return $this->belongsTo(Lottery::class, 'lottery_id', 'id');
     }
+
+    public function lottery_set()
+    {
+        return $this->belongsTo(LotterySet::class, 'lottery_set_id', 'id');
+    }
 }

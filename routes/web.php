@@ -96,6 +96,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function()
         Route::get('add_on_index', 'add_on_index')->name('lottery.add_on_index');
         Route::get('my_lottery', 'my_lottery')->name('lottery.my_lottery');
         Route::get('all_lotteries', 'all_lotteries')->name('lottery.all_lotteries');
+        Route::get('lottery_set_edit/{id}', 'lottery_set_edit')->name('lottery.lottery_set_edit');
+        Route::post('lottery_set_update', 'lottery_set_update')->name('lottery.lottery_set_update');
     });
 
 

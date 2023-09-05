@@ -240,24 +240,45 @@ $lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDa
 
         if(Auth::user()){
 
-            $user_id = auth()->id();
-            $data =  $request->all();
+        $lottery = Lottery::where('name',$request->lottery_name)->first();
+        if($lottery->id=='1')
+        {
 
-            $lottery = Lottery::where('name',$request->lottery_name)->first();
-            $save_data=[];
-            foreach($data['number_select'] as $key=>$desc){
-                $save_data[]=[
-                    'lottery_id' => $lottery->id,
-                    'user_id' => $user_id,
-                    'number_select'=>$desc,
-                    'quantity'=>$data['quantity'][$key],
-                ];
+            $total_quantity_with_price = array_sum($request->quantity)*11;
+            $total_credit = Auth::user()->total_credit;
+            if($total_credit >= $total_quantity_with_price ){
+                $user_id = auth()->id();
+                $data =  $request->all();
+
+                $save_data=[];
+                foreach($data['number_select'] as $key=>$desc){
+                    $save_data[]=[
+                        'lottery_id' => $lottery->id,
+                        'user_id' => $user_id,
+                        'number_select'=>$desc,
+                        'quantity'=>$data['quantity'][$key],
+                        'lottery_set_id'=>$request->lottery_set_id,
+                    ];
+                }
+                LotteryPlace::insert($save_data);
+
+                $new_credit = $total_credit - $total_quantity_with_price;
+                User::where('id',$user_id)->update(['total_credit'=>$new_credit]);
+                return redirect()->route('home_page')
+                ->with(['message'=>'Lottery Create Successfully','type'=>'success']);
+            }else{
+                return redirect()->route('home_page')
+                ->with(['message'=>'You have less credit','type'=>'error']);
+
             }
-            LotteryPlace::insert($save_data);
+
+        }
+
+
         }
 
         return redirect()->back()
-                ->with(['message'=>'User update successfully','type'=>'success']);
+        ->with(['message'=>'please login for lottery purchase','type'=>'error']);
     }
 
 }

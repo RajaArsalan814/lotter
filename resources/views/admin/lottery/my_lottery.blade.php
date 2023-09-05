@@ -33,7 +33,8 @@
           <th>Name</th>
           <th>Number Select</th>
           <th>Quantity</th>
-          <th>Created At</th>
+          <th>Start</th>
+          <th>End</th>
           <th>Number Win</th>
         </tr>
       </thead>
@@ -44,8 +45,9 @@
           <td>{{$item->lottery->name}}</td>
           <td>{{$item->number_select}}</td>
           <td>{{$item->quantity}}</td>
-          <td>{{$item->created_at}}</td>
-          <td>5</td>
+          <td>{{$item->lottery_set->start_date}}</td>
+          <td>{{$item->lottery_set->end_date}}</td>
+          <td>{{$item->lottery_set->number_win}}</td>
         </tr>
         @endforeach
         @endif

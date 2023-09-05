@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-
+use App\Models\User;
 class HomeController extends Controller
 {
     /**
@@ -29,7 +29,15 @@ class HomeController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        return redirect('/');
+
+        $user_id = Auth::user()->id;
+        $current_user = User::where('id',$user_id)->first();
+        if($current_user->type=='user'){
+            Auth::logout();
+            return redirect()->route('home_page');
+        }else{
+            Auth::logout();
+            return redirect('/');
+        }
     }
 }

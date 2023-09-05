@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-    
+
 <!-- Mirrored from iamubaidah.com/html/poklotto/poklotto/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 21 Jul 2023 13:48:00 GMT -->
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,12 +24,13 @@
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-<!-- 
+<!--
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.css')}}" />
 
     </head>
     <style>
@@ -69,7 +70,7 @@
             <div class="loader"><div></div><div></div><div></div><div></div></div>
         </div>
         <!-- preloader end -->
-        
+
         <!-- header begin -->
         <div class="header">
             <div class="container">
@@ -99,10 +100,7 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav m-auto">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="index.html">Homepage</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="about.html">About us</a>
+                                            <a class="nav-link active" href="{{route('home_page')}}">Homepage</a>
                                         </li>
                                         <!-- <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -117,9 +115,11 @@
                                                 <li><a class="dropdown-item" href="error.html">Error 404</a></li>
                                             </ul>
                                         </li> -->
+                                        @if(!Auth::user())
                                         <li class="nav-item">
                                             <a class="" href="{{route('user-login')}}">Login</a>
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </nav>
@@ -177,7 +177,7 @@
                         <div class="col-md-10">
 
                 <div class="part-picking-number">
-                 
+
                     <div class="animation-body animated">
                         <div class="picking-number-body">
                             <div class="tab-content" id="pills-tabContent">
@@ -185,9 +185,9 @@
                                     <form action="{{route('submit_data')}}" method="GET">
                                             <input type="hidden" value="urwashi" name=" _name" id="my_name" class="part-lottery-info">
                                             <div class="container">
-                                                <div class="row">                                            
-                                                    <div class="col-md-10 col-lg-10 col-sm-10">      
-                                                        
+                                                <div class="row">
+                                                    <div class="col-md-10 col-lg-10 col-sm-10">
+
                                                     <table class="table table-striped" id="tbUser">
                                                         <thead>
                                                         <tr>
@@ -200,6 +200,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <input type="hidden" value="{{$data['lottery_name']}}"  name="lottery_name">
+                                                            <input type="hidden" value="{{$data['lottery_set_id']}}"  name="lottery_set_id">
                                                         @foreach($data['token'] as $item)
                                                         <tr>
                                                             <td>
@@ -319,7 +320,7 @@
                                                 01
                                             </button> <button class="single-number" >
                                                 02
-                                            </button> 
+                                            </button>
                                              <button class="single-number" >
                                                 03
                                             </button>
@@ -343,7 +344,7 @@
                                             </button>
                                             <button class="single-number" >
                                                 10
-                                            </button> 
+                                            </button>
                                         </div>
                                     </div> -->
                                     <!-- <div class="picking-number-final-step">
@@ -477,7 +478,7 @@
                                     <div class="lottery-info">
                                         <div class="part-text">
                                             <h4 class="title">What is super enaLotto?</h4>
-                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery. 
+                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery.
                                             The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week, EuroMillions GO! draws take place every hour, every day of the week!</p>
                                         </div>
                                         <div class="middle-part-elem">
@@ -533,8 +534,8 @@
                                         </div>
                                         <div class="part-text">
                                             <h4 class="title">How to play EuroMillions GO!</h4>
-                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery. 
-                                                The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week, 
+                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery.
+                                                The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week,
                                                 EuroMillions GO! draws take place every hour, every day of the week!</p>
                                         </div>
                                     </div>
@@ -603,10 +604,10 @@
                                     </div>
                                 </div>
                                 <div class="part-descr">
-                                    <p>Problem set compensation the harmonics, understood. 
+                                    <p>Problem set compensation the harmonics, understood.
                                         Hundreds times, of until they employed sure a behind boundless their for
-                                        boss's the certainly and gilded form of tend every of better an over when of 
-                                        than an are until time. <span class="txt-bold">Would of impenetrable</span>  
+                                        boss's the certainly and gilded form of tend every of better an over when of
+                                        than an are until time. <span class="txt-bold">Would of impenetrable</span>
                                         just the out diesel as it near at that.
                                     </p>
                                     <ul>
@@ -834,7 +835,7 @@
                         </div>
                         <div class="part-feedback">
                             <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the 
+                                Since it’s all by chance, enjoy picking your numbers or seeing what the
                             lottery terminal generates Since it’s all by chance.
                             <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
                         </p>
@@ -853,7 +854,7 @@
                         </div>
                         <div class="part-feedback">
                             <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the 
+                                Since it’s all by chance, enjoy picking your numbers or seeing what the
                             lottery terminal generates Since it’s all by chance.
                             <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
                         </p>
@@ -872,7 +873,7 @@
                         </div>
                         <div class="part-feedback">
                             <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the 
+                                Since it’s all by chance, enjoy picking your numbers or seeing what the
                             lottery terminal generates Since it’s all by chance.
                             <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
                         </p>
@@ -994,19 +995,19 @@ $('.sub').click(function() {
 // alert('asd');
 // var quantitiy=0;
 //    $('.quantity-right-plus').click(function(e){
-        
+
 //        // Stop acting like a button
 //        e.preventDefault();
 //        // Get the field name
 //        var quantity = parseInt($('#quantity').val());
-        
+
 //         // If is not undefined
-            
+
 //             $('#quantity').val(quantity + 1);
 
-          
+
 //             // Increment
-        
+
 //     });
 
 //      $('.quantity-left-minus').click(function(e){
@@ -1014,9 +1015,9 @@ $('.sub').click(function() {
 //         e.preventDefault();
 //         // Get the field name
 //         var quantity = parseInt($('#quantity').val());
-        
+
 //         // If is not undefined
-      
+
 //             // Increment
 //             if(quantity>0){
 //             $('#quantity').val(quantity - 1);
@@ -1027,7 +1028,7 @@ $('.sub').click(function() {
     $("#tbUser").on('click', '.btnDelete', function () {
     $(this).closest('tr').remove();
 });
-    
+
 });
         </script>
         <!-- jQuery js -->
@@ -1040,6 +1041,23 @@ $('.sub').click(function() {
         <script src="{{asset('website_assets/js/main.js')}}"></script>
         <!-- lottery js initialize -->
         <script src="{{asset('website_assets/js/lotteries-initialization.js')}}"></script>
+        <script src="{{asset('assets/vendor/libs/toastr/toastr.js')}}"></script>
+        <script src="{{asset('assets/js/ui-toasts.js')}}"></script>
+        <script>
+
+            var type = "{{ Session::get('type') }}";
+              switch (type) {
+                  case 'success':
+                      toastr.success("{{ Session::get('message') }}");
+
+                      break;
+
+                  case 'error':
+                      toastr.error("{{ Session::get('message') }}");
+                      break;
+
+              }
+        </script>
     </body>
 
 <!-- Mirrored from iamubaidah.com/html/poklotto/poklotto/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 21 Jul 2023 13:48:23 GMT -->
