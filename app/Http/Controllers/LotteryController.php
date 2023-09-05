@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Lottery;
 use App\Models\LotterySet;
 use App\Models\LotteryPlace;
+use Carbon\Carbon;
 
 class LotteryController extends Controller
 {
@@ -115,24 +116,98 @@ class LotteryController extends Controller
 
     public function add_on_store(Request $request){
         // return $request->all();
+
+        $already_lottery = LotterySet::where('lottery_id',$request->lottery_id)->whereDate('created_at',Carbon::today())->first();
+        if(isset($already_lottery)){
+
+            return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery already created for today','type'=>'error']);
+        }else{
+
+        $dt = Carbon::now();
+        $date = $dt->toDateString();
+        $start_date = $date .' 11:00:00' ;
+        $end_date = $date .' 11:30:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $request->start_date;
-        $lottery_set->end_date = $request->end_date;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
         $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 11:31:00' ;
+        $end_date = $date .' 11:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 12:00:00' ;
+        $end_date = $date .' 12:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 12:31:00' ;
+        $end_date = $date .' 12:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 01:00:00' ;
+        $end_date = $date .' 01:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 01:31:00' ;
+        $end_date = $date .' 01:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 02:00:00' ;
+        $end_date = $date .' 02:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+    }
+
         return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery created successfully','type'=>'success']);
     }
 
     public function add_on_index()
     {
+
      $lottery = LotterySet::with('lottery')->get();
         return view('admin.lottery.add_on_index',compact('lottery'));
     }
 
     public function my_lottery(){
 
-        $user_id = auth()->id(); 
-        
+        $user_id = auth()->id();
+
         $my_lottery = LotteryPlace::with('lottery')->where('user_id',$user_id)->get();
         return view('admin.lottery.my_lottery',compact('my_lottery'));
     }

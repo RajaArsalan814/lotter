@@ -21,7 +21,7 @@
       <div class="col-md-4 user_status"></div>
     </div>
     <div class="dt-buttons btn-group flex-wrap">
-      {{-- <a href="{{route('lottery.add_on')}}" class="btn btn-secondary add-new btn-primary">Lottery Create</a> --}}
+      <a href="{{route('lottery.add_on')}}" class="btn btn-secondary add-new btn-primary">Lottery Set</a>
    <!-- <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_00" type="button" data-bs-toggle="offcanvas"><span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add Lottery</span></span></button>  -->
 </div>
 

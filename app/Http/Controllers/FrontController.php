@@ -17,6 +17,10 @@ use Session;
 use Carbon\Carbon;
 use App\Models\Lottery;
 use App\Models\LotteryPlace;
+use App\Models\LotterySet;
+
+use DateTime;
+
 
 class FrontController extends Controller
 {
@@ -25,14 +29,14 @@ class FrontController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        
+
 
         return view('front.index',compact('setting'));
     }
     public function user_login(Request $request)
     {
         return view('login');
-       
+
     }
 
 
@@ -47,11 +51,11 @@ class FrontController extends Controller
     }
     public function resetpassword($id)
     {
-        
+
         return view('resetpasswords-password',compact('id'));
     }
 
-    
+
     public function loginAdminProcess(Request $request)
     {
         // return $request->all();
@@ -59,30 +63,30 @@ class FrontController extends Controller
 
         if (Auth::attempt(array('phone_number' => $request->phone_number, 'password' => $request->password,'status'=>1)))
         {
-        
+
             $user = User::where('phone_number',$request->phone_number)->first();
             if($user->type=='user'){
-                return redirect('home_page')->with(array('message'=>'Login success','type'=>'success'));                
+                return redirect('home_page')->with(array('message'=>'Login success','type'=>'success'));
             }
                 return redirect('admin/dashboard')->with(array('message'=>'Login success','type'=>'success'));
-          
+
         }else{
             return redirect()->back()->with(array('message'=>'Invalid email or Password','type'=>'error'));
         }
     }
-    
-    
+
+
     public function RegisterProcess(Request $request)
     {
-       
-        $token = Str::random(40); 
+
+        $token = Str::random(40);
         $validator = Validator::make($request->all(), [
            'email' => 'required|email|unique:users',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->with(array('message'=>'This email is already exists','type'=>'error'));
         }
-        
+
         $users = $request->except(['password','password_confirmation'],$request->all());
         if($request->hasFile('profile'))
         {
@@ -90,11 +94,11 @@ class FrontController extends Controller
             $users['profile'] = $img;
             $request->profile->move(public_path("documents/profile"), $img);
         }
-       
-        
+
+
         $users['type'] ='admin';
         $users['role_id'] ='Administrator';
-       
+
 
         $users['password'] = Hash::make($request->password);
         $user = User::create($users);
@@ -102,7 +106,7 @@ class FrontController extends Controller
         if($user)
         {
             return redirect()->back()->with(array('message'=>'account created succssfully Please check your email','type'=>'success'));
-            
+
         }else{
             return redirect()->with(array('message'=>'Somethig wrong please try again','type'=>'error'));
         }
@@ -110,7 +114,7 @@ class FrontController extends Controller
 
     }
 
-      
+
     public function forgotPassword(Request $request)
     {
         if($request->has("email")){
@@ -158,7 +162,7 @@ class FrontController extends Controller
             }
         }else
         {
-            
+
             return redirect()->back()->with(['message'=>"Please provide reset password token",'type'=>'error']);
         }
     }
@@ -183,19 +187,40 @@ class FrontController extends Controller
     public function getProducts(Request $request)
     {
        return $search = CarModel::where('status',1)->where('modal_name', 'like', "%$request->modal_name%")->get();
-       
+
     }
 
     public function searchProduct($id)
     {
-        $search = CarModel::where('status',1)->where('id',$id)->get(); 
+        $search = CarModel::where('status',1)->where('id',$id)->get();
         $setting = Setting::first();
         return view('front.index',compact('search','setting'));
     }
 
     public function home_page(){
-            
-        $lottery = Lottery::get();
+
+
+        $current_time = time();
+
+        $new_time = $current_time + 30 * 60;
+        date_default_timezone_set("Asia/Karachi");
+
+        $start_time =  date('H:i:s');
+        $end_time =  date('H:i:s', $new_time);
+
+// $lottery_set = LotterySet::whereTime('start_date' ,'>', $start_time)->get();
+
+// DB::table('lottery_sets')->whereTime('start_date', '>=', $start_time)->get();
+// $rows = DB::table('lottery_sets')->whereBetween('start_date', [$start_time,$end_time])->get();
+
+$currentDateTime = Carbon::now();
+$currentDate = Carbon::today();
+
+$lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
+    ->whereTime('end_date', '>=', $currentDateTime)
+    ->whereDate('start_date',$currentDate)
+    ->get();
+
         return view('website.index',compact('lottery'));
     }
 
@@ -205,7 +230,7 @@ class FrontController extends Controller
     }
 
     public function hit_me(Request $request){
-        
+
         $data = $request->all();
         return view('website.second_page',compact('data'));
     }
@@ -214,10 +239,10 @@ class FrontController extends Controller
 
 
         if(Auth::user()){
-            
+
             $user_id = auth()->id();
             $data =  $request->all();
-    
+
             $lottery = Lottery::where('name',$request->lottery_name)->first();
             $save_data=[];
             foreach($data['number_select'] as $key=>$desc){
@@ -230,7 +255,7 @@ class FrontController extends Controller
             }
             LotteryPlace::insert($save_data);
         }
-        
+
         return redirect()->back()
                 ->with(['message'=>'User update successfully','type'=>'success']);
     }

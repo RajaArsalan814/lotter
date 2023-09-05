@@ -34,19 +34,19 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label>Start Date Time</label>
+                                                    {{-- <div class="form-group">
+                                                        <label></label>
                                                         <div class="controls">
                                                             <input type="datetime-local" name="start_date" class="form-control" required data-validation-required-message="This field is required" placeholder="Amount">
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
-                                                    <div class="form-group">
+                                                    {{-- <div class="form-group">
                                                         <label>End Date Time</label>
                                                         <div class="controls">
                                                             <input type="datetime-local" name="end_date" class="form-control" required data-validation-required-message="This field is required" placeholder="Amount">
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                 </div>
 

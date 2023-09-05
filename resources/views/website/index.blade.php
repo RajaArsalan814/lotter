@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-    
+
 <!-- Mirrored from iamubaidah.com/html/poklotto/poklotto/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 21 Jul 2023 13:48:00 GMT -->
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,7 +59,7 @@
             <div class="loader"><div></div><div></div><div></div><div></div></div>
         </div>
         <!-- preloader end -->
-        
+
         <!-- header begin -->
         <div class="header">
             <div class="container">
@@ -183,7 +183,7 @@
                                     <span class="lottery-icon">
                                         <img src="{{asset('website_assets/img/lottery/euro-jackpot.png')}}" alt="">
                                     </span>
-                                    <span class="lottery-name">{{$item->name}}</span>
+                                    <span class="lottery-name">{{$item->lottery->name}}</span>
                                 </a>
                             </li>
                             @endforeach
@@ -204,7 +204,7 @@
                                     <span class="lottery-name">Lottery 3</span>
                                 </a>
                             </li> -->
-                         
+
                         </ul>
                     </div>
                     <div class="animation-body animated">
@@ -214,8 +214,8 @@
                                     <form action="{{route('hit_me')}}" method="GET">
                                             <input type="hidden" value="urwashi" name="lottery_name" id="my_name" class="part-lottery-info">
                                             <div class="container">
-                                                <div class="row">                                            
-                                                    <div class="col-md-12 col-lg-12 col-sm-4">      
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-12 col-sm-4">
                                                         <label>
                                                         <input type="checkbox" name="token[]" value="1" class="card-input-element" />
                                                             <div class="panel panel-default card-input">
@@ -308,7 +308,7 @@
                                                 01
                                             </button> <button class="single-number" >
                                                 02
-                                            </button> 
+                                            </button>
                                              <button class="single-number" >
                                                 03
                                             </button>
@@ -332,7 +332,7 @@
                                             </button>
                                             <button class="single-number" >
                                                 10
-                                            </button> 
+                                            </button>
                                         </div>
                                     </div> -->
                                     <div class="picking-number-final-step">
@@ -340,7 +340,7 @@
                                             <p><span class="b-txt">Note :</span>  Problem set compensation the harmonics, understood. Hundreds times,<br/> of until they employed sure a behind boundless their for.</p>
                                         </div>
                                         <div class="part-btn">
-                                        
+
                                         </div>
                                     </div>
                                 </div>
@@ -467,7 +467,7 @@
                                     <div class="lottery-info">
                                         <div class="part-text">
                                             <h4 class="title">What is super enaLotto?</h4>
-                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery. 
+                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery.
                                             The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week, EuroMillions GO! draws take place every hour, every day of the week!</p>
                                         </div>
                                         <div class="middle-part-elem">
@@ -523,8 +523,8 @@
                                         </div>
                                         <div class="part-text">
                                             <h4 class="title">How to play EuroMillions GO!</h4>
-                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery. 
-                                                The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week, 
+                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery.
+                                                The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week,
                                                 EuroMillions GO! draws take place every hour, every day of the week!</p>
                                         </div>
                                     </div>
@@ -589,10 +589,10 @@
                                     </div>
                                 </div>
                                 <div class="part-descr">
-                                    <p>Problem set compensation the harmonics, understood. 
+                                    <p>Problem set compensation the harmonics, understood.
                                         Hundreds times, of until they employed sure a behind boundless their for
-                                        boss's the certainly and gilded form of tend every of better an over when of 
-                                        than an are until time. <span class="txt-bold">Would of impenetrable</span>  
+                                        boss's the certainly and gilded form of tend every of better an over when of
+                                        than an are until time. <span class="txt-bold">Would of impenetrable</span>
                                         just the out diesel as it near at that.
                                     </p>
                                     <ul>
@@ -820,7 +820,7 @@
                         </div>
                         <div class="part-feedback">
                             <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the 
+                                Since it’s all by chance, enjoy picking your numbers or seeing what the
                             lottery terminal generates Since it’s all by chance.
                             <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
                         </p>
@@ -839,7 +839,7 @@
                         </div>
                         <div class="part-feedback">
                             <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the 
+                                Since it’s all by chance, enjoy picking your numbers or seeing what the
                             lottery terminal generates Since it’s all by chance.
                             <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
                         </p>
@@ -858,7 +858,7 @@
                         </div>
                         <div class="part-feedback">
                             <p><img class="quot-1" src="{{asset('website_assets/img/testimonial/quot-icon-1.png')}}" alt="">
-                                Since it’s all by chance, enjoy picking your numbers or seeing what the 
+                                Since it’s all by chance, enjoy picking your numbers or seeing what the
                             lottery terminal generates Since it’s all by chance.
                             <img class="quot-2" src="{{asset('website_assets/img/testimonial/quot-icon-2.png')}}" alt="">
                         </p>
