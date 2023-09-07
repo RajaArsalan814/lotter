@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Lottery;
 use App\Models\LotterySet;
 use App\Models\LotteryPlace;
+use App\Models\User;
 use Carbon\Carbon;
 
 class LotteryController extends Controller
@@ -210,7 +211,30 @@ class LotteryController extends Controller
     }
 
     public function lottery_set_update(Request $request){
+
         LotterySet::where('id',$request->lottery_set_id)->update(['number_win'=>$request->lottery_number_select]);
+
+        $lottery_win_user = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('number_select',$request->lottery_number_select)->get();
+
+        // foreach($lottery_win_user as $item){
+        //     return $item->number_select;
+        // }
+
+        foreach($lottery_win_user as $key=>$desc){
+
+            $total_price =   $desc->quantity * 11;
+            $previous_credit = User::where('id',$desc->user_id)->value('total_credit');
+            $new_price_value =  $previous_credit+$total_price;
+            User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
+            // $save_data[]=[
+            //     'lottery_id' => $lottery->id,
+            //     'user_id' => $user_id,
+            //     'number_select'=>$desc,
+            //     'quantity'=>$data['quantity'][$key],
+            //     'lottery_set_id'=>$request->lottery_set_id,
+            // ];
+        }
+
         return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery Win ','type'=>'success']);
     }
 

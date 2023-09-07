@@ -35,7 +35,7 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Win</th>
-          <th>Action</th>
+          <th>Choose Winner</th>
         </tr>
       </thead>
       <tbody>
@@ -47,7 +47,9 @@
           <td>{{$item->start_date}}</td>
           <td>{{$item->end_date}}</td>
           <td>{{$item->number_win}}</td>
+          @if($item->number_win==null)
           <td><a href="{{route('lottery.lottery_set_edit',['id'=>$item->id])}}">Edit</a></td>
+          @endif
         </tr>
         @endforeach
         @endif
