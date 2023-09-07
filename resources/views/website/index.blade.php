@@ -172,6 +172,7 @@
         <!-- banner end -->
 
         <!-- lottery begin -->
+        @if(!$lottery->isEmpty())
         <div class="lotteries">
             <div class="bg-shape-2">
                 <img src="{{asset('website_assets/img/bg-shape/bg-shape-2.png')}}" alt="">
@@ -202,26 +203,9 @@
                                 </a>
                             </li>
                             @endforeach
-
-                            <!-- <li>
-                                <a href="#0" class="single-lottery-item">
-                                    <span class="lottery-icon">
-                                        <img src="{{asset('website_assets/img/lottery/euro-millions.png')}}" alt="">
-                                    </span>
-                                    <span class="lottery-name">Lottery 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#0" class="single-lottery-item">
-                                    <span class="lottery-icon">
-                                        <img src="{{asset('website_assets/img/lottery/ena-lotto.png')}}" alt="">
-                                    </span>
-                                    <span class="lottery-name">Lottery 3</span>
-                                </a>
-                            </li> -->
-
                         </ul>
                     </div>
+
                     <div class="animation-body animated">
                         <div class="picking-number-body">
                             <div class="tab-content" id="pills-tabContent">
@@ -318,39 +302,7 @@
                                             </div>
 
                                     </form>
-                                    <!-- <div class="picking-number-palate">
-                                        <div class="number-box ">
-                                             <button class="single-number" >
-                                                01
-                                            </button> <button class="single-number" >
-                                                02
-                                            </button>
-                                             <button class="single-number" >
-                                                03
-                                            </button>
-                                            <button class="single-number" >
-                                                04
-                                            </button>
-                                            <button class="single-number" >
-                                                05
-                                            </button>
-                                            <button class="single-number" >
-                                                06
-                                            </button>
-                                            <button class="single-number" >
-                                                07
-                                            </button>
-                                            <button class="single-number" >
-                                                08
-                                            </button>
-                                            <button class="single-number" >
-                                                09
-                                            </button>
-                                            <button class="single-number" >
-                                                10
-                                            </button>
-                                        </div>
-                                    </div> -->
+
                                     <div class="picking-number-final-step">
                                         <div class="part-text">
                                             <p><span class="b-txt">Note :</span>  Problem set compensation the harmonics, understood. Hundreds times,<br/> of until they employed sure a behind boundless their for.</p>
@@ -551,6 +503,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- lottery end -->
 
 

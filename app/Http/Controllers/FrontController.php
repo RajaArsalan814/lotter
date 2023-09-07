@@ -231,8 +231,15 @@ $lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDa
 
     public function hit_me(Request $request){
 
-        $data = $request->all();
-        return view('website.second_page',compact('data'));
+        $user_id = Auth::user()->id;
+        $already_place = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('user_id',$user_id)->first();
+        if($already_place->count() > 0 ){
+            return redirect()->route('home_page')
+            ->with(['message'=>'you already assign in this lottery','type'=>'error']);
+        }else{
+            $data = $request->all();
+            return view('website.second_page',compact('data'));
+        }
     }
 
     public function submit_data(Request $request){
