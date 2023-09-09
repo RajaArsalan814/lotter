@@ -212,7 +212,8 @@
                                 <div class="tab-pane fade show active" id="pills-numbers" role="tabpanel" aria-labelledby="pills-numbers-tab">
                                     <form action="{{route('hit_me')}}" method="GET">
                                             <input type="hidden" value="urwashi" name="lottery_name" id="my_name" class="part-lottery-info">
-                                            <input type="hidden" value="" name="lottery_set_id" id="lottery_set_id" class="lottery-set-id">
+                                            <input type="hidden"
+                                            value="{{ $first_lottery ? $first_lottery->id : '' }}" name="lottery_set_id" id="lottery_set_id" class="lottery-set-id">
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-sm-4">

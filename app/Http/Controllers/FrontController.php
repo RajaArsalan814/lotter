@@ -208,20 +208,25 @@ class FrontController extends Controller
         $start_time =  date('H:i:s');
         $end_time =  date('H:i:s', $new_time);
 
-// $lottery_set = LotterySet::whereTime('start_date' ,'>', $start_time)->get();
+        // $lottery_set = LotterySet::whereTime('start_date' ,'>', $start_time)->get();
 
-// DB::table('lottery_sets')->whereTime('start_date', '>=', $start_time)->get();
-// $rows = DB::table('lottery_sets')->whereBetween('start_date', [$start_time,$end_time])->get();
+        // DB::table('lottery_sets')->whereTime('start_date', '>=', $start_time)->get();
+        // $rows = DB::table('lottery_sets')->whereBetween('start_date', [$start_time,$end_time])->get();
 
-$currentDateTime = Carbon::now();
-$currentDate = Carbon::today();
+        $currentDateTime = Carbon::now();
+        $currentDate = Carbon::today();
 
-$lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
-    ->whereTime('end_date', '>=', $currentDateTime)
-    ->whereDate('start_date',$currentDate)
-    ->get();
+        $lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
+            ->whereTime('end_date', '>=', $currentDateTime)
+            ->whereDate('start_date',$currentDate)
+            ->get();
 
-        return view('website.index',compact('lottery'));
+            $first_lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
+            ->whereTime('end_date', '>=', $currentDateTime)
+            ->whereDate('start_date',$currentDate)
+            ->first();
+
+        return view('website.index',compact('lottery','first_lottery'));
     }
 
     public function next_page(){
@@ -230,10 +235,11 @@ $lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDa
     }
 
     public function hit_me(Request $request){
-
+        return $request->all();
         $user_id = Auth::user()->id;
-        $already_place = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('user_id',$user_id)->first();
-        if($already_place->count() > 0 ){
+
+        $already_place = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('user_id',$user_id)->count();
+        if($already_place > 0 ){
             return redirect()->route('home_page')
             ->with(['message'=>'you already assign in this lottery','type'=>'error']);
         }else{
