@@ -13,4 +13,15 @@ class LotterySet extends Model
     {
         return $this->BelongsTo(Lottery::class, 'lottery_id', 'id');
     }
+
+
+    /**
+     * Get all of the comments for the LotterySet
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lottery_place()
+    {
+        return $this->hasMany(LotteryPlace::class, 'lottery_set_id', 'id');
+    }
 }

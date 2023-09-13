@@ -21,6 +21,35 @@
     </div>
     @endif
 
+
+    @if (Auth::user()->type=='admin')
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">Total Users</div>
+            <div class="card-body"> {{$total_users}}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">Total Agents</div>
+            <div class="card-body"> {{$total_agents}}</div>
+        </div>
+    </div>
+
+    @endif
+
+
+    @if (Auth::user()->type=='agent')
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">Total Users</div>
+            <div class="card-body"> {{$total_users_by_agents}}</div>
+        </div>
+    </div>
+
+    @endif
+
 </div>
 @endsection
 

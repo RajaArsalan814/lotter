@@ -33,18 +33,42 @@
           <th>Name</th>
           <th>Number Select</th>
           <th>Quantity</th>
+          @if(count($my_lottery)>0)
+          <th>Amount Pay</th>
+          @endif
           <th>Start</th>
           <th>End</th>
           <th>Number Win</th>
         </tr>
       </thead>
       <tbody>
+
+        @if (Auth::user()->type=='agent')
+
+        @if(count($all_user_lottery)>0)
+        @foreach($all_user_lottery as $item)
+        <tr>
+          <td>{{$item->lottery->name}}</td>
+          <td>{{$item->number_select}}</td>
+          <td>{{$item->quantity}}</td>
+          <td>{{$item->lottery_set->start_date}}</td>
+          <td>{{$item->lottery_set->end_date}}</td>
+          <td>{{$item->lottery_set->number_win}}</td>
+        </tr>
+        @endforeach
+        @endif
+        @endif
         @if(count($my_lottery)>0)
         @foreach($my_lottery as $item)
         <tr>
           <td>{{$item->lottery->name}}</td>
           <td>{{$item->number_select}}</td>
           <td>{{$item->quantity}}</td>
+          @if ($item->lottery_id=='1')
+            <td>{{$item->quantity*11}}</td>
+          @elseif($item->lottery_id=='2')
+          <td>{{$item->quantity*111}}</td>
+          @endif
           <td>{{$item->lottery_set->start_date}}</td>
           <td>{{$item->lottery_set->end_date}}</td>
           <td>{{$item->lottery_set->number_win}}</td>

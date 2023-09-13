@@ -38,7 +38,8 @@ class UserController extends Controller
 
         if(auth()->user()->type == 'agent')
         {
-             $agents = User::orderBy('id','DESC')->where('user_id',auth()->user()->id)->where('type','user')->where('id','!=',auth()->user()->id)->get();
+
+            $agents = User::orderBy('id','DESC')->where('user_id',auth()->user()->id)->where('type','user')->where('id','!=',auth()->user()->id)->get();
             $roles = Role::where('name','Users')->pluck('name')->all();
 
         }else{

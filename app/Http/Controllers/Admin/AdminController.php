@@ -25,7 +25,13 @@ class AdminController extends Controller
         //   Session::save();
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
-       return view('admin/dashboard',compact('user'));
+
+        $total_users_by_agents = User::where('type','user')->where('user_id',$user_id)->count();
+        $total_agents = User::where('type','agent')->count();
+        $total_users = User::where('type','user')->count();
+
+
+       return view('admin/dashboard',compact('user','total_users','total_agents','total_users_by_agents'));
     }
 
 

@@ -33,7 +33,7 @@
                                                     <br>
                                                     <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Client First Name</label>
+                                                        <label> First Name</label>
                                                         <div class="controls">
                                                             <input type="text" name="first_name" class="form-control" required data-validation-required-message="This field is required" value="{{$user->first_name}} ">
                                                         </div>
@@ -42,7 +42,7 @@
 
                                                     <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Client Last Name</label>
+                                                        <label> Last Name</label>
                                                         <div class="controls">
                                                             <input type="text" name="last_name" class="form-control" required data-validation-required-message="This field is required" value="{{$user->last_name}} ">
                                                         </div>
@@ -51,7 +51,7 @@
 
                                                     <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Client Id</label>
+                                                        <label> Id</label>
                                                         <div class="controls">
                                                             <input type="text"  class="form-control" required data-validation-required-message="This field is required" value="{{$user->phone_number}} " disabled>
                                                         </div>
@@ -71,7 +71,7 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Client Credit</label>
+                                                        <label> Credit</label>
                                                         <div class="controls">
                                                             <input type="text" name="total_credit" class="form-control" required data-validation-required-message="This field is required" value="{{$user->total_credit}} "  >
                                                         </div>

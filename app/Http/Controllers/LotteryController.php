@@ -8,7 +8,7 @@ use App\Models\LotterySet;
 use App\Models\LotteryPlace;
 use App\Models\User;
 use Carbon\Carbon;
-
+use DB;
 class LotteryController extends Controller
 {
     public function index(){
@@ -116,18 +116,16 @@ class LotteryController extends Controller
 
 
     public function add_on_store(Request $request){
-        // return $request->all();
 
         $already_lottery = LotterySet::where('lottery_id',$request->lottery_id)->whereDate('created_at',Carbon::today())->first();
         if(isset($already_lottery)){
-
             return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery already created for today','type'=>'error']);
         }else{
-            date_default_timezone_set("Asia/Karachi");
+        date_default_timezone_set("Asia/Karachi");
         $dt = Carbon::now();
         $date = $dt->toDateString();
-        $start_date = $date .' 01:00:00' ;
-        $end_date = $date .' 01:30:00' ;
+        $start_date = $date .' 14:00:00' ;
+        $end_date = $date .' 14:30:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
@@ -136,8 +134,8 @@ class LotteryController extends Controller
 
 
         $date = $dt->toDateString();
-        $start_date = $date .' 01:31:00' ;
-        $end_date = $date .' 01:59:00' ;
+        $start_date = $date .' 14:31:00' ;
+        $end_date = $date .' 14:59:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
@@ -147,8 +145,8 @@ class LotteryController extends Controller
 
 
         $date = $dt->toDateString();
-        $start_date = $date .' 02:00:00' ;
-        $end_date = $date .' 02:30:00' ;
+        $start_date = $date .' 15:00:00' ;
+        $end_date = $date .' 15:30:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
@@ -157,8 +155,8 @@ class LotteryController extends Controller
 
 
         $date = $dt->toDateString();
-        $start_date = $date .' 02:31:00' ;
-        $end_date = $date .' 02:59:00' ;
+        $start_date = $date .' 15:31:00' ;
+        $end_date = $date .' 15:59:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
@@ -166,8 +164,8 @@ class LotteryController extends Controller
         $lottery_set->save();
 
         $date = $dt->toDateString();
-        $start_date = $date .' 03:00:00' ;
-        $end_date = $date .' 03:30:00' ;
+        $start_date = $date .' 16:00:00' ;
+        $end_date = $date .' 16:30:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
@@ -175,8 +173,18 @@ class LotteryController extends Controller
         $lottery_set->save();
 
         $date = $dt->toDateString();
-        $start_date = $date .' 03:31:00' ;
-        $end_date = $date .' 03:59:00' ;
+        $start_date = $date .' 16:31:00' ;
+        $end_date = $date .' 16:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 17:00:00' ;
+        $end_date = $date .' 17:30:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
@@ -184,24 +192,53 @@ class LotteryController extends Controller
         $lottery_set->save();
 
         $date = $dt->toDateString();
-        $start_date = $date .' 04:00:00' ;
-        $end_date = $date .' 04:30:00' ;
+        $start_date = $date .' 17:31:00' ;
+        $end_date = $date .' 17:59:00' ;
         $lottery_set = new LotterySet;
         $lottery_set->lottery_id = $request->lottery_id;
         $lottery_set->start_date = $start_date;
         $lottery_set->end_date = $end_date;
         $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 18:00:00' ;
+        $end_date = $date .' 18:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 18:31:00' ;
+        $end_date = $date .' 18:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
 
 
     }
 
-        return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery created successfully','type'=>'success']);
+        return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery created successfully for today','type'=>'success']);
     }
 
     public function add_on_index()
     {
 
-     $lottery = LotterySet::with('lottery')->get();
+        // lottery_set_id
+        //
+// return
+//         DB::table('lottery_places')
+//         ->count(DB::raw('DISTINCT user_id'));
+        // ->get();
+        // ->groupBy('id')
+
+
+        $lottery = LotterySet::with('lottery','lottery_place')->orderBy('id','DESC')->get();
         return view('admin.lottery.add_on_index',compact('lottery'));
     }
 
@@ -219,13 +256,25 @@ class LotteryController extends Controller
         // foreach($lottery_win_user as $item){
         //     return $item->number_select;
         // }
+        // return $request->lottery_id;
 
         foreach($lottery_win_user as $key=>$desc){
 
-            $total_price =   $desc->quantity * 11;
-            $previous_credit = User::where('id',$desc->user_id)->value('total_credit');
-            $new_price_value =  $previous_credit+$total_price;
-            User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
+
+            if($desc->lottery_id=='1'){
+
+                $total_price =   $desc->quantity * 100;
+                $previous_credit = User::where('id',$desc->user_id)->value('total_credit');
+                $new_price_value =  $previous_credit+$total_price;
+                User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
+            }elseif($desc->lottery_id == '2'){
+
+                $total_price =   $desc->quantity * 1000;
+                $previous_credit = User::where('id',$desc->user_id)->value('total_credit');
+                $new_price_value =  $previous_credit+$total_price;
+                User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
+
+            }
             // $save_data[]=[
             //     'lottery_id' => $lottery->id,
             //     'user_id' => $user_id,
@@ -241,9 +290,13 @@ class LotteryController extends Controller
     public function my_lottery(){
 
         $user_id = auth()->id();
+        $all_user_ids = User::where('user_id',$user_id)->pluck('id');
 
-        $my_lottery = LotteryPlace::with('lottery','lottery_set')->where('user_id',$user_id)->get();
-        return view('admin.lottery.my_lottery',compact('my_lottery'));
+        $my_lottery = LotteryPlace::with('lottery','lottery_set')->where('user_id',$user_id)->orderBy('id','DESC')->get();
+
+        $all_user_lottery  = LotteryPlace::with('lottery','lottery_set')->whereIN('user_id',$all_user_ids)->orderBy('id','DESC')->get();
+
+        return view('admin.lottery.my_lottery',compact('my_lottery','all_user_lottery'));
     }
 
     public function all_lotteries(){
@@ -252,3 +305,13 @@ class LotteryController extends Controller
         return view('admin.lottery.all_lotteries',compact('all_lotteries'));
     }
 }
+
+// lottery create by admin
+
+// agent create users
+
+// auto lotery win by users
+
+// agent add credit to users data
+
+//

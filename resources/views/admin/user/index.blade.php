@@ -45,7 +45,7 @@
           <td>{{$item->last_name}}</td>
           <td>{{$item->phone_number}}</td>
           <td>{{$item->role_id}}</td>
-          <td>{{$item->total_credit}}</td>
+          <td>{{$item->total_credit ? $item->total_credit  : '0' }}</td>
           <td><a href="{{route('user_edit',['id'=>$item->id])}}">Edit</a></td>
         </tr>
         @endforeach
