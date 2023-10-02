@@ -99,6 +99,8 @@ $(document).ready(function($){
     single_lottery.each(function(){
         $(this).find('.single-lottery-item').on('click', function(){
 
+
+
             if($(this).parent().siblings().find('.single-lottery-item').hasClass('active')) {
                 $(this).parent().siblings().find('.single-lottery-item').removeClass('active');
                 $(this).addClass('active');
@@ -107,6 +109,13 @@ $(document).ready(function($){
             logoChange($(this));
 
             var active_lottery_name = $(this).find('.lottery-name').text();
+            if(active_lottery_name=='dev'){
+                document.getElementById('check1').style.display='none';
+                document.getElementById('check2').style.display='block';
+            }else{
+                document.getElementById('check1').style.display='block';
+                document.getElementById('check2').style.display='none';
+            }
             var lottery_set_id = $(this).find('.lottery-set-id').text();
             document.getElementById('my_name').value=active_lottery_name;
             document.getElementById('lottery_set_id').value=lottery_set_id;

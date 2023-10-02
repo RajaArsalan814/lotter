@@ -30,6 +30,7 @@
     <table class=" table border-top">
       <thead>
         <tr>
+            <th>Lottery ID</th>
           <th>Name</th>
           <th>Number Select</th>
           <th>Quantity</th>
@@ -48,6 +49,7 @@
         @if(count($all_user_lottery)>0)
         @foreach($all_user_lottery as $item)
         <tr>
+        <td>{{$item->lottery_set_id}}</td>
           <td>{{$item->lottery->name}}</td>
           <td>{{$item->number_select}}</td>
           <td>{{$item->quantity}}</td>
@@ -61,6 +63,7 @@
         @if(count($my_lottery)>0)
         @foreach($my_lottery as $item)
         <tr>
+        <td>{{$item->lottery_set_id}}</td>
           <td>{{$item->lottery->name}}</td>
           <td>{{$item->number_select}}</td>
           <td>{{$item->quantity}}</td>
@@ -68,6 +71,8 @@
             <td>{{$item->quantity*11}}</td>
           @elseif($item->lottery_id=='2')
           <td>{{$item->quantity*111}}</td>
+          @elseif($item->lottery_id=='3')
+          <td>{{$item->quantity*500}}</td>
           @endif
           <td>{{$item->lottery_set->start_date}}</td>
           <td>{{$item->lottery_set->end_date}}</td>

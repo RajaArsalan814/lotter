@@ -27,16 +27,56 @@
                                                         <div class="controls">
                                                             <select name="lottery_number_select" id="" class="form-control">
                                                                 <option disabled selected>Select Number</option>
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
-                                                                    <option value="6">6</option>
-                                                                    <option value="7">7</option>
-                                                                    <option value="8">8</option>
-                                                                    <option value="9">9</option>
-                                                                    <option value="10">10</option>
+                                                                   @if ($lottery_set->lottery_id== '3')
+
+                                                                   <option value="12">12</option>
+                                                                   <option value="13">13</option>
+                                                                   <option value="14">14</option>
+                                                                   <option value="15">15</option>
+                                                                   <option value="16">16</option>
+
+                                                                   <option value="21">21</option>
+                                                                   <option value="23">23</option>
+                                                                   <option value="24">24</option>
+                                                                   <option value="25">25</option>
+                                                                   <option value="26">26</option>
+
+                                                                   <option value="31">31</option>
+                                                                   <option value="32">32</option>
+                                                                   <option value="34">34</option>
+                                                                   <option value="35">35</option>
+                                                                   <option value="36">36</option>
+
+                                                                   <option value="41">41</option>
+                                                                   <option value="42">42</option>
+                                                                   <option value="43">43</option>
+                                                                   <option value="45">45</option>
+                                                                   <option value="46">46</option>
+
+                                                                   <option value="51">51</option>
+                                                                   <option value="52">52</option>
+                                                                   <option value="54">54</option>
+                                                                   <option value="55">55</option>
+                                                                   <option value="56">56</option>
+
+                                                                   <option value="61">61</option>
+                                                                   <option value="62">62</option>
+                                                                   <option value="64">64</option>
+                                                                   <option value="65">65</option>
+                                                                   <option value="66">66</option>
+
+                                                                   @else
+                                                                   <option value="1">1</option>
+                                                                   <option value="2">2</option>
+                                                                   <option value="3">3</option>
+                                                                   <option value="4">4</option>
+                                                                   <option value="5">5</option>
+                                                                   <option value="6">6</option>
+                                                                   <option value="7">7</option>
+                                                                   <option value="8">8</option>
+                                                                   <option value="9">9</option>
+                                                                   <option value="10">10</option>
+                                                                   @endif
                                                             </select>
                                                         </div>
                                                     </div>

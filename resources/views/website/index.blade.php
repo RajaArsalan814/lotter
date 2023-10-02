@@ -199,14 +199,14 @@
                                         <img src="{{asset('website_assets/img/lottery/euro-jackpot.png')}}" alt="">
                                     </span>
                                     <span class="lottery-name">{{$item->lottery->name}}</span>
-                                    <span class="lottery-set-id" style="display: none">{{$item->id}}</span>
+                                    <span class="lottery-set-id" style="display:none">{{$item->id}}</span>
                                 </a>
                             </li>
                             @endforeach
                         </ul>
                     </div>
 
-                    <div class="animation-body animated">
+                    <div class="animation-body animated" id="check1">
                         <div class="picking-number-body">
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-numbers" role="tabpanel" aria-labelledby="pills-numbers-tab">
@@ -297,6 +297,480 @@
                                                             </div>
                                                             </div>
                                                         </label>
+                                                        <button type="submit" value="Continue" class="btn-pok">Continue</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                    </form>
+
+                                    <div class="picking-number-final-step">
+                                        <div class="part-text">
+                                            <p><span class="b-txt">Note :</span>  Problem set compensation the harmonics, understood. Hundreds times,<br/> of until they employed sure a behind boundless their for.</p>
+                                        </div>
+                                        <div class="part-btn">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-winners" role="tabpanel" aria-labelledby="pills-winners-tab">
+                                    <div class="lottery-winners">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6">
+                                                <h4 class="lottery-winners-title">Most recent Winners</h4>
+                                                <div class="single-winner">
+                                                    <div class="part-img">
+                                                        <img src="{{asset('website_assets/img/lottery/winner-1.jpg')}}" alt="">
+                                                    </div>
+                                                    <div class="part-text">
+                                                        <p><span class="user-name">Richard william</span> has won 2 minutes ago.</p>
+                                                        <ul>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">Match :</span>
+                                                                <span class="ps-descr">02+</span>
+                                                            </li>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">payout :</span>
+                                                                <span class="ps-descr">$536.25</span>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="winning-number">
+                                                            <span class="single-number ">01</span>
+                                                            <span class="single-number ">25</span>
+                                                            <span class="single-number ">34</span>
+                                                            <span class="single-number ">43</span>
+                                                            <span class="single-number ">55</span>
+                                                            <span class="single-number  special">02</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="single-winner">
+                                                    <div class="part-img">
+                                                        <img src="{{asset('website_assets/img/lottery/winner-3.jpg')}}" alt="">
+                                                    </div>
+                                                    <div class="part-text">
+                                                        <p><span class="user-name">Rebecca Gaby</span>  has won 13 minutes ago.</p>
+                                                        <ul>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">Match :</span>
+                                                                <span class="ps-descr"> 08+</span>
+                                                            </li>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">payout :</span>
+                                                                <span class="ps-descr">$325.02</span>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="winning-number">
+                                                            <span class="single-number selected">10</span>
+                                                            <span class="single-number selected">22</span>
+                                                            <span class="single-number selected">30</span>
+                                                            <span class="single-number selected">47</span>
+                                                            <span class="single-number selected">53</span>
+                                                            <span class="single-number selected special">10</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <h4 class="lottery-winners-title">All time top winners</h4>
+                                                <div class="single-winner">
+                                                    <div class="part-img">
+                                                        <img src="{{asset('website_assets/img/lottery/winner-2.jpg')}}" alt="">
+                                                    </div>
+                                                    <div class="part-text">
+                                                        <p><span class="user-name">Summer Colson</span>  has won 3 months ago.</p>
+                                                        <ul>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">Match :</span>
+                                                                <span class="ps-descr">08+</span>
+                                                            </li>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">payout :</span>
+                                                                <span class="ps-descr">$1,965.00</span>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="winning-number">
+                                                            <span class="single-number selected">20</span>
+                                                            <span class="single-number selected">35</span>
+                                                            <span class="single-number selected">54</span>
+                                                            <span class="single-number selected">69</span>
+                                                            <span class="single-number selected">35</span>
+                                                            <span class="single-number selected special">17</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="single-winner">
+                                                    <div class="part-img">
+                                                        <img src="{{asset('website_assets/img/lottery/winner-4.jpg')}}" alt="">
+                                                    </div>
+                                                    <div class="part-text">
+                                                        <p><span class="user-name">Kai Dellit</span>  has won 7 months ago.</p>
+                                                        <ul>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">Match :</span>
+                                                                <span class="ps-descr">08+</span>
+                                                            </li>
+                                                            <li class="plaing-stats">
+                                                                <span class="ps-title">payout :</span>
+                                                                <span class="ps-descr">$2,120.25</span>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="winning-number">
+                                                            <span class="single-number selected">36</span>
+                                                            <span class="single-number selected">21</span>
+                                                            <span class="single-number selected">76</span>
+                                                            <span class="single-number selected">54</span>
+                                                            <span class="single-number selected">77</span>
+                                                            <span class="single-number selected special">37</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="part-btn">
+                                            <a href="lotteries.html" class="btn-pok">See full table <i class="fa-solid fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                                    <div class="lottery-info">
+                                        <div class="part-text">
+                                            <h4 class="title">What is super enaLotto?</h4>
+                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery.
+                                            The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week, EuroMillions GO! draws take place every hour, every day of the week!</p>
+                                        </div>
+                                        <div class="middle-part-elem">
+                                            <div class="part-info">
+                                                <div class="single-stat">
+                                                    <h5 class="title">country:</h5>
+                                                    <div class="country-descr">
+                                                        <span class="cn-flag">
+                                                            <img src="{{asset('website_assets/img/lottery/uk-flag.png')}}" alt="">
+                                                        </span>
+                                                        <span class="stats-txt">united kingdom</span>
+                                                    </div>
+                                                </div>
+                                                <div class="single-stat">
+                                                    <h5 class="title">Schedule:</h5>
+                                                    <ul class="stats-descr">
+                                                        <li class="stats-txt">Thursday 2:59 AM UTC</li>
+                                                        <li class="stats-txt">Fridat 3:19 pM UTC</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="single-stat">
+                                                    <h5 class="title">Guess Range:</h5>
+                                                    <ul class="stats-descr">
+                                                        <li class="stats-txt">5/69+1/29</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="latest-winning-number">
+                                                <div class="lwn-header">
+                                                    <h5 class="title">Latest Result:</h5>
+                                                    <div class="date-selection">
+                                                        <div class="dropdown">
+                                                            <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                24 apr 2022
+                                                            </button>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                <li><a class="dropdown-item" href="#0">24 apr 2022</a></li>
+                                                                <li><a class="dropdown-item" href="#0">01 may 2022</a></li>
+                                                                <li><a class="dropdown-item" href="#0">31 june 2022</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="lwn-number-palate">
+                                                    <span class="single-number selected">20</span>
+                                                    <span class="single-number selected">35</span>
+                                                    <span class="single-number selected">54</span>
+                                                    <span class="single-number selected">69</span>
+                                                    <span class="single-number selected">35</span>
+                                                    <span class="single-number selected special">17</span>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="part-text">
+                                            <h4 class="title">How to play EuroMillions GO!</h4>
+                                            <p>EoMillions GO! is a Quick Draw lottery-style game based on the famous European lottery.
+                                                The rules of the game are the same as those of the original lottery but the draw results are determined by a random number generator (RNG). Unlike the EuroMillions lottery with its two draws a week,
+                                                EuroMillions GO! draws take place every hour, every day of the week!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="animation-body animated" id="check2" style="display:none">
+                        <div class="picking-number-body">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-numbers" role="tabpanel" aria-labelledby="pills-numbers-tab">
+                                    <form action="{{route('hit_me')}}" method="GET">
+                                            <input type="hidden" value="dev" name="lottery_name" id="my_name" class="part-lottery-info">
+                                            <input type="hidden"
+                                            value="{{ $first_lottery ? $first_lottery->id : '' }}" name="lottery_set_id" id="lottery_set_id" class="lottery-set-id">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-12 col-sm-4">
+                                                        <label>
+                                                        <input type="checkbox" name="token[]" value="12" class="card-input-element" />
+                                                            <div class="panel panel-default card-input">
+                                                            <div class="panel-body">
+                                                                12
+                                                            </div>
+                                                            </div>
+                                                        </label>
+                                                        <label>
+                                                        <input type="checkbox" name="token[]" value="13" class="card-input-element" />
+                                                            <div class="panel panel-default card-input">
+                                                            <div class="panel-body">
+                                                                13
+                                                            </div>
+                                                            </div>
+                                                        </label>
+                                                        <label>
+                                                            <input type="checkbox" name="token[]" value="14" class="card-input-element" />
+                                                                <div class="panel panel-default card-input">
+                                                                <div class="panel-body">
+                                                                    14
+                                                                </div>
+                                                                </div>
+                                                            </label>
+                                                        <label>
+                                                        <input type="checkbox" name="token[]" value="15" class="card-input-element" />
+                                                            <div class="panel panel-default card-input">
+                                                            <div class="panel-body">
+                                                                15
+                                                            </div>
+                                                            </div>
+                                                        </label>
+
+                                                            <label>
+                                                            <input type="checkbox" name="token[]" value="16" class="card-input-element" />
+                                                                <div class="panel panel-default card-input">
+                                                                <div class="panel-body">
+                                                                    16
+                                                                </div>
+                                                                </div>
+                                                            </label>
+                                                            <label>
+                                                            <input type="checkbox" name="token[]" value="21" class="card-input-element" />
+                                                                <div class="panel panel-default card-input">
+                                                                <div class="panel-body">
+                                                                    21
+                                                                </div>
+                                                                </div>
+                                                            </label>
+
+                                                            <label>
+                                                                <input type="checkbox" name="token[]" value="23" class="card-input-element" />
+                                                                    <div class="panel panel-default card-input">
+                                                                    <div class="panel-body">
+                                                                        23
+                                                                    </div>
+                                                                    </div>
+                                                                </label>
+                                                            <label>
+                                                            <input type="checkbox" name="token[]" value="24" class="card-input-element" />
+                                                                <div class="panel panel-default card-input">
+                                                                <div class="panel-body">
+                                                                    24
+                                                                </div>
+                                                                </div>
+                                                            </label>
+
+                                                                <label>
+                                                                <input type="checkbox" name="token[]" value="25" class="card-input-element" />
+                                                                    <div class="panel panel-default card-input">
+                                                                    <div class="panel-body">
+                                                                        25
+                                                                    </div>
+                                                                    </div>
+                                                                </label>
+                                                                <label>
+                                                                <input type="checkbox" name="token[]" value="26" class="card-input-element" />
+                                                                    <div class="panel panel-default card-input">
+                                                                    <div class="panel-body">
+                                                                        26
+                                                                    </div>
+                                                                    </div>
+                                                                </label>
+
+
+                                                                <label>
+                                                                    <input type="checkbox" name="token[]" value="31" class="card-input-element" />
+                                                                        <div class="panel panel-default card-input">
+                                                                        <div class="panel-body">
+                                                                            31
+                                                                        </div>
+                                                                        </div>
+                                                                    </label>
+
+                                                                    <label>
+                                                                        <input type="checkbox" name="token[]" value="32" class="card-input-element" />
+                                                                            <div class="panel panel-default card-input">
+                                                                            <div class="panel-body">
+                                                                                32
+                                                                            </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    <label>
+                                                                    <input type="checkbox" name="token[]" value="34" class="card-input-element" />
+                                                                        <div class="panel panel-default card-input">
+                                                                        <div class="panel-body">
+                                                                            34
+                                                                        </div>
+                                                                        </div>
+                                                                    </label>
+
+                                                                        <label>
+                                                                        <input type="checkbox" name="token[]" value="35" class="card-input-element" />
+                                                                            <div class="panel panel-default card-input">
+                                                                            <div class="panel-body">
+                                                                                35
+                                                                            </div>
+                                                                            </div>
+                                                                        </label>
+                                                                        <label>
+                                                                        <input type="checkbox" name="token[]" value="36" class="card-input-element" />
+                                                                            <div class="panel panel-default card-input">
+                                                                            <div class="panel-body">
+                                                                                36
+                                                                            </div>
+                                                                            </div>
+                                                                        </label>
+
+
+                                                                        <label>
+                                                                            <input type="checkbox" name="token[]" value="41" class="card-input-element" />
+                                                                                <div class="panel panel-default card-input">
+                                                                                <div class="panel-body">
+                                                                                    41
+                                                                                </div>
+                                                                                </div>
+                                                                            </label>
+
+                                                                            <label>
+                                                                                <input type="checkbox" name="token[]" value="42" class="card-input-element" />
+                                                                                    <div class="panel panel-default card-input">
+                                                                                    <div class="panel-body">
+                                                                                        42
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                            <label>
+                                                                            <input type="checkbox" name="token[]" value="43" class="card-input-element" />
+                                                                                <div class="panel panel-default card-input">
+                                                                                <div class="panel-body">
+                                                                                    43
+                                                                                </div>
+                                                                                </div>
+                                                                            </label>
+
+                                                                                <label>
+                                                                                <input type="checkbox" name="token[]" value="45" class="card-input-element" />
+                                                                                    <div class="panel panel-default card-input">
+                                                                                    <div class="panel-body">
+                                                                                        45
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label>
+                                                                                <input type="checkbox" name="token[]" value="46" class="card-input-element" />
+                                                                                    <div class="panel panel-default card-input">
+                                                                                    <div class="panel-body">
+                                                                                        46
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </label>
+
+                                                                                <label>
+                                                                                    <input type="checkbox" name="token[]" value="51" class="card-input-element" />
+                                                                                        <div class="panel panel-default card-input">
+                                                                                        <div class="panel-body">
+                                                                                            51
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </label>
+
+                                                                                    <label>
+                                                                                        <input type="checkbox" name="token[]" value="52" class="card-input-element" />
+                                                                                            <div class="panel panel-default card-input">
+                                                                                            <div class="panel-body">
+                                                                                                52
+                                                                                            </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                    <label>
+                                                                                    <input type="checkbox" name="token[]" value="54" class="card-input-element" />
+                                                                                        <div class="panel panel-default card-input">
+                                                                                        <div class="panel-body">
+                                                                                            54
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </label>
+
+                                                                                        <label>
+                                                                                        <input type="checkbox" name="token[]" value="55" class="card-input-element" />
+                                                                                            <div class="panel panel-default card-input">
+                                                                                            <div class="panel-body">
+                                                                                                55
+                                                                                            </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                        <label>
+                                                                                        <input type="checkbox" name="token[]" value="56" class="card-input-element" />
+                                                                                            <div class="panel panel-default card-input">
+                                                                                            <div class="panel-body">
+                                                                                                56
+                                                                                            </div>
+                                                                                            </div>
+                                                                                        </label>
+
+
+                                                                                <label>
+                                                                                    <input type="checkbox" name="token[]" value="61" class="card-input-element" />
+                                                                                        <div class="panel panel-default card-input">
+                                                                                        <div class="panel-body">
+                                                                                            61
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </label>
+
+                                                                                    <label>
+                                                                                        <input type="checkbox" name="token[]" value="62" class="card-input-element" />
+                                                                                            <div class="panel panel-default card-input">
+                                                                                            <div class="panel-body">
+                                                                                                62
+                                                                                            </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                    <label>
+                                                                                    <input type="checkbox" name="token[]" value="64" class="card-input-element" />
+                                                                                        <div class="panel panel-default card-input">
+                                                                                        <div class="panel-body">
+                                                                                            64
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </label>
+
+                                                                                        <label>
+                                                                                        <input type="checkbox" name="token[]" value="65" class="card-input-element" />
+                                                                                            <div class="panel panel-default card-input">
+                                                                                            <div class="panel-body">
+                                                                                                65
+                                                                                            </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                        <label>
+                                                                                        <input type="checkbox" name="token[]" value="66" class="card-input-element" />
+                                                                                            <div class="panel panel-default card-input">
+                                                                                            <div class="panel-body">
+                                                                                                66
+                                                                                            </div>
+                                                                                            </div>
+                                                                                        </label>
                                                         <button type="submit" value="Continue" class="btn-pok">Continue</button>
                                                     </div>
                                                 </div>

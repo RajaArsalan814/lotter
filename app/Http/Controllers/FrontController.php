@@ -30,7 +30,6 @@ class FrontController extends Controller
     {
         $setting = Setting::first();
 
-
         return view('front.index',compact('setting'));
     }
     public function user_login(Request $request)
@@ -214,14 +213,14 @@ class FrontController extends Controller
         // $rows = DB::table('lottery_sets')->whereBetween('start_date', [$start_time,$end_time])->get();
 
         $currentDateTime = Carbon::now();
-        $currentDate = Carbon::today();
+        $currentDate     = Carbon::today();
 
         $lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
             ->whereTime('end_date', '>=', $currentDateTime)
             ->whereDate('start_date',$currentDate)
             ->get();
 
-            $first_lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
+        $first_lottery = LotterySet::with('lottery')->whereTime('start_date', '<=', $currentDateTime)
             ->whereTime('end_date', '>=', $currentDateTime)
             ->whereDate('start_date',$currentDate)
             ->first();
@@ -249,11 +248,25 @@ class FrontController extends Controller
     }
 
     public function submit_data(Request $request){
+        // return $request->all();
 
+        $current_time = time();
+        $new_time = $current_time + 30 * 60;
+        date_default_timezone_set("Asia/Karachi");
+        $start_time =  date('H:i:s');
+        $end_time =  date('H:i:s', $new_time);
+        $currentDateTime = Carbon::now();
+        $currentDate     = Carbon::today();
 
         if(Auth::user()){
 
         $lottery = Lottery::where('name',$request->lottery_name)->first();
+
+        $lottery_set_id = LotterySet::where('lottery_id',$lottery->id)->whereTime('start_date', '<=', $currentDateTime)
+        ->whereTime('end_date', '>=', $currentDateTime)
+        ->whereDate('start_date',$currentDate)
+        ->first();
+
         if($lottery->id=='1')
         {
 
@@ -270,7 +283,7 @@ class FrontController extends Controller
                         'user_id' => $user_id,
                         'number_select'=>$desc,
                         'quantity'=>$data['quantity'][$key],
-                        'lottery_set_id'=>$request->lottery_set_id,
+                        'lottery_set_id'=>$lottery_set_id->id,
                     ];
                 }
                 LotteryPlace::insert($save_data);
@@ -299,7 +312,7 @@ class FrontController extends Controller
                         'user_id' => $user_id,
                         'number_select'=>$desc,
                         'quantity'=>$data['quantity'][$key],
-                        'lottery_set_id'=>$request->lottery_set_id,
+                        'lottery_set_id'=>$lottery_set_id->id,
                     ];
                 }
                 LotteryPlace::insert($save_data);
@@ -313,7 +326,37 @@ class FrontController extends Controller
                 ->with(['message'=>'You have less credit','type'=>'error']);
 
             }
-        }else{
+        }elseif($lottery->id=='3'){
+            $request->lottery_set_id;
+            $total_quantity_with_price = array_sum($request->quantity)*500;
+            $total_credit = Auth::user()->total_credit;
+            if($total_credit >= $total_quantity_with_price ){
+                $user_id = auth()->id();
+                $data =  $request->all();
+
+                $save_data=[];
+                foreach($data['number_select'] as $key=>$desc){
+                    $save_data[]=[
+                        'lottery_id' => $lottery->id,
+                        'user_id' => $user_id,
+                        'number_select'=>$desc,
+                        'quantity'=>$data['quantity'][$key],
+                        'lottery_set_id'=>$lottery_set_id->id,
+                    ];
+                }
+                LotteryPlace::insert($save_data);
+
+                $new_credit = $total_credit - $total_quantity_with_price;
+                User::where('id',$user_id)->update(['total_credit'=>$new_credit]);
+                return redirect()->route('home_page')
+                ->with(['message'=>'Lottery Create Successfully','type'=>'success']);
+            }else{
+                return redirect()->route('home_page')
+                ->with(['message'=>'You have less credit','type'=>'error']);
+
+            }
+        }
+        else{
             return "third one is about to create";
         }
 

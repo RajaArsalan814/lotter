@@ -116,6 +116,7 @@ class LotteryController extends Controller
 
 
     public function add_on_store(Request $request){
+        // return $request->all();
 
         $already_lottery = LotterySet::where('lottery_id',$request->lottery_id)->whereDate('created_at',Carbon::today())->first();
         if(isset($already_lottery)){
@@ -123,6 +124,92 @@ class LotteryController extends Controller
         }else{
         date_default_timezone_set("Asia/Karachi");
         $dt = Carbon::now();
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 10:00:00' ;
+        $end_date = $date .' 10:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 10:31:00' ;
+        $end_date = $date .' 10:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 11:00:00' ;
+        $end_date = $date .' 11:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 11:31:00' ;
+        $end_date = $date .' 11:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 12:00:00' ;
+        $end_date = $date .' 12:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 12:31:00' ;
+        $end_date = $date .' 12:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 13:00:00' ;
+        $end_date = $date .' 13:30:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+
+        $date = $dt->toDateString();
+        $start_date = $date .' 13:31:00' ;
+        $end_date = $date .' 13:59:00' ;
+        $lottery_set = new LotterySet;
+        $lottery_set->lottery_id = $request->lottery_id;
+        $lottery_set->start_date = $start_date;
+        $lottery_set->end_date = $end_date;
+        $lottery_set->save();
+
+
+
         $date = $dt->toDateString();
         $start_date = $date .' 14:00:00' ;
         $end_date = $date .' 14:30:00' ;
@@ -236,27 +323,45 @@ class LotteryController extends Controller
 //         ->count(DB::raw('DISTINCT user_id'));
         // ->get();
         // ->groupBy('id')
+        // return
+        // return   LotteryPlace::withcount(['users'])->get();
+        $lottery = LotterySet::withcount(['lottery','lottery_place as total_users' => function ($query) {
 
+            $query->select(DB::raw('count(distinct(user_id))'));
 
-        $lottery = LotterySet::with('lottery','lottery_place')->orderBy('id','DESC')->get();
+        }])->orderBy('id','DESC')->get();
+
         return view('admin.lottery.add_on_index',compact('lottery'));
     }
 
     public function lottery_set_edit($id){
+
         $lottery_set = LotterySet::where('id',$id)->first();
         return view('admin.lottery.lottery_edit',compact('lottery_set'));
     }
 
     public function lottery_set_update(Request $request){
+        // return $request->all();
 
         LotterySet::where('id',$request->lottery_set_id)->update(['number_win'=>$request->lottery_number_select]);
 
         $lottery_win_user = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('number_select',$request->lottery_number_select)->get();
 
-        // foreach($lottery_win_user as $item){
-        //     return $item->number_select;
-        // }
-        // return $request->lottery_id;
+        $participant_users = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->orderBy('id','DESC')->get();
+
+
+        foreach($participant_users as $key=>$desc){
+            if($desc->lottery_id=='3'){
+
+                $number_select = strrev($desc->number_select);
+                if($number_select == $request->lottery_number_select) {
+                    $total_price =   $desc->quantity * 500;
+                    $previous_credit = User::where('id',$desc->user_id)->value('total_credit');
+                    $new_price_value =  $previous_credit+$total_price;
+                    User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
+                }
+            }
+        }
 
         foreach($lottery_win_user as $key=>$desc){
 
@@ -274,7 +379,18 @@ class LotteryController extends Controller
                 $new_price_value =  $previous_credit+$total_price;
                 User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
 
+            }elseif($desc->lottery_id == '3'){
+
+
+                $ai_number_win = $request->lottery_number_select;
+                $total_price =   $desc->quantity * 2000;
+                $previous_credit = User::where('id',$desc->user_id)->value('total_credit');
+
+                $new_price_value =  $previous_credit+$total_price;
+                User::where('id',$desc->user_id)->update(['total_credit'=> $new_price_value]);
+
             }
+
             // $save_data[]=[
             //     'lottery_id' => $lottery->id,
             //     'user_id' => $user_id,
@@ -292,8 +408,8 @@ class LotteryController extends Controller
         $user_id = auth()->id();
         $all_user_ids = User::where('user_id',$user_id)->pluck('id');
 
-        $my_lottery = LotteryPlace::with('lottery','lottery_set')->where('user_id',$user_id)->orderBy('id','DESC')->get();
 
+        $my_lottery = LotteryPlace::with('lottery','lottery_set')->where('user_id',$user_id)->orderBy('id','DESC')->get();
         $all_user_lottery  = LotteryPlace::with('lottery','lottery_set')->whereIN('user_id',$all_user_ids)->orderBy('id','DESC')->get();
 
         return view('admin.lottery.my_lottery',compact('my_lottery','all_user_lottery'));

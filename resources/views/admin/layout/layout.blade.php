@@ -136,15 +136,15 @@
 
                   <li class="menu-item ">
                     <a href="{{route('lottery.add_on_index')}}" class="menu-link">
-                             <div data-i18n="Lottery Set">Lottery  Set</div>
+                             <div data-i18n="Lottery Set">All Lottery </div>
                     </a>
                  </li>
 
-                 <li class="menu-item ">
+                 {{-- <li class="menu-item ">
                     <a href="{{route('lottery.all_lotteries')}}" class="menu-link">
                              <div data-i18n="All Lotteries">All Lotteries </div>
                     </a>
-                 </li>
+                 </li> --}}
 
                  @endcan
                  <li class="menu-item ">

@@ -18,4 +18,11 @@ class LotteryPlace extends Model
     {
         return $this->belongsTo(LotterySet::class, 'lottery_set_id', 'id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+
 }
