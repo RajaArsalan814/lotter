@@ -234,17 +234,37 @@ class FrontController extends Controller
     }
 
     public function hit_me(Request $request){
-        // return $request->all();
-        $user_id = Auth::user()->id;
 
-        $already_place = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('user_id',$user_id)->count();
-        if($already_place > 0 ){
-            return redirect()->route('home_page')
-            ->with(['message'=>'you already assign in this lottery','type'=>'error']);
+        if(isset($request->number_1)){
+            if($request->number_1 == $request->number_2 ){
+                return redirect()->route('home_page')
+                ->with(['message'=>'you can not select same number ','type'=>'error']);
+            }else{
+
+                if($request->lottery_name == 'dev')
+                {
+                    // return "asd";
+                    $data =   array(
+                       'token'=>array($request->number_1.''.$request->number_2),
+                       'lottery_set_id' => $request->lottery_set_id ,
+                       'lottery_name' => $request->lottery_name ,
+                       );
+                       return view('website.second_page',compact('data'));
+                }
+            }
         }else{
-            $data = $request->all();
-            return view('website.second_page',compact('data'));
+
+            $user_id = Auth::user()->id;
+            $already_place = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('user_id',$user_id)->count();
+            if($already_place > 0 ){
+                return redirect()->route('home_page')
+                ->with(['message'=>'you already assign in this lottery','type'=>'error']);
+            }else{
+                $data = $request->all();
+                return view('website.second_page',compact('data'));
+            }
         }
+
     }
 
     public function submit_data(Request $request){

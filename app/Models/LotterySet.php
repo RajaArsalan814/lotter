@@ -9,6 +9,8 @@ class LotterySet extends Model
 {
     use HasFactory;
 
+    protected $fillable=['start_date','end_date','lottery_id'];
+
     public function lottery()
     {
         return $this->BelongsTo(Lottery::class, 'lottery_id', 'id');

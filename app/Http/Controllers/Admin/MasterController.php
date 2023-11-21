@@ -15,18 +15,15 @@ use DB;
 
 use Illuminate\Support\Arr;
 
-class AgentController extends Controller
+class MasterController extends Controller
 {
-    function __construct()
-    {
-
-         $this->middleware('permission:agent-list', ['only' => ['index']]);
-         $this->middleware('permission:agent-create', ['only' => ['create','store']]);
-         $this->middleware('permission:agent-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:agent-delete', ['only' => ['destroy']]);
-
-
-    }
+    // function __construct()
+    // {
+    //      $this->middleware('permission:master-list', ['only' => ['index']]);
+    //      $this->middleware('permission:master-create', ['only' => ['create','store']]);
+    //      $this->middleware('permission:master-edit', ['only' => ['edit','update']]);
+    //      $this->middleware('permission:master-delete', ['only' => ['destroy']]);
+    // }
     // public function index()
     // {
     //     $agents = User::orderBy('id','DESC')->where('type','user')->where('id','!=',auth()->user()->id)->get();
@@ -48,9 +45,9 @@ class AgentController extends Controller
     public function index()
     {
 
-        $agents = User::withCount('overall_users')->orderBy('id','DESC')->where('type','agent')->where('id','!=',auth()->user()->id)->get();
-        $roles = Role::where('name','Agent')->pluck('name')->all();
-        return view('admin.user.agent',compact('agents','roles'));
+        $master = User::withCount('overall_users')->orderBy('id','DESC')->where('type','master')->where('id','!=',auth()->user()->id)->get();
+        $roles = Role::where('name','Master')->pluck('name')->all();
+        return view('admin.user.master',compact('master','roles'));
     }
 
 
@@ -71,13 +68,15 @@ class AgentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function my_store(Request $request)
     {
+        // return $request->all();
+
 
 
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'phone_number' => 'required|unique:users,phone_number',
             'password' => 'required',
 
         ]);
@@ -86,28 +85,33 @@ class AgentController extends Controller
             return redirect()->back()->with(['message'=>$validator->messages()->first(),'type' => 'error']);
          }
 
-        $input = $request->except(['_token', 'profile','password_confirm'],$request->all());
+         $user = new User;
+         $user->first_name= $request->first_name;
+         $user->last_name= $request->last_name;
+         $user->phone_number= $request->phone_number;
+         $user->role_id= 'Master';
+         $user->type= 'master';
+         $input['password'] = Hash::make($request->password);
+         $user->password=$input['password'];
+         $user->save();
+        // $input = $request->except(['_token', 'profile','password_confirm'],$request->all());
+        //  if($request->role_id == 'Master'){
+        //     $input['type'] ='master';
+        // }
 
-        if($request->role_id == 'Administrator'){
-            $input['type'] ='admin';
-        }else if($request->role_id == 'Agent'){
-            $input['type'] ='agent';
-        }else if($request->role_id == 'User'){
-            $input['type'] ='user';
-        }
+        // if($request->hasFile('profile'))
+        // {
+        //     $img = Str::random(20).$request->file('profile')->getClientOriginalName();
+        //     $input['profile'] = $img;
+        //     $request->profile->move(public_path("documents/profile"), $img);
+        // }
 
-        $input['password'] = Hash::make($input['password']);
-        if($request->hasFile('profile'))
-        {
-            $img = Str::random(20).$request->file('profile')->getClientOriginalName();
-            $input['profile'] = $img;
-            $request->profile->move(public_path("documents/profile"), $img);
-        }
-        $input['user_id'] = auth()->user()->id;
-        $user = User::create($input);
-        $user->assignRole($request->input('role_id'));
+    //    return  $request->input('role_id');
+        // $input['user_id'] = auth()->user()->id;
+        // $user = User::create($input);
+        // $user->assignRole($request->input('role_id'));
 
-        return redirect()->back()->with(['message'=>'User created successfully','type'=>'success']);
+        return redirect()->back()->with(['message'=>'Master created successfully','type'=>'success']);
     }
 
     /**

@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-6 d-xl-block d-lg-block d-flex align-items-center">
                                 <div class="logo">
-                                    <a href="index.html">
+                                    <a href="#">
                                         <h2 style="color: white;">
                                              Logo
                                         </h2>
@@ -892,7 +892,7 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 col-sm-9">
                             <div class="part-about">
                                 <div class="footer-logo">
-                                    <a href="index.html">
+                                    <a href="#">
                                         <!-- <img src="{{asset('website_assets/img/logo.png')}}" alt="" class="logo"> -->
                                     </a>
                                 </div>
@@ -937,7 +937,7 @@
                         <div class="footer-menu">
                             <ul>
                                 <li>
-                                    <a href="index.html" class="single-menu">homepage</a>
+                                    <a href="#" class="single-menu">homepage</a>
                                 </li>
                                 <li>
                                     <a href="about.html" class="single-menu">About Us</a>

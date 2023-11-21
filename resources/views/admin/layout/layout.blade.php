@@ -113,8 +113,16 @@
                               <div data-i18n="Agent">Agent</div>
                            </a>
                   @endcan
-
                   </li>
+
+
+                  <li class="menu-item @if (Route::currentRouteName() == 'master.index' )  active open  @endif">
+                    @if (Auth::user()->type=='admin')
+                             <a href="{{route('master.index')}}" class="menu-link">
+                                <div data-i18n="Master">Master</div>
+                             </a>
+                    @endif
+                    </li>
 
 
                   <li class="menu-item @if ( Route::currentRouteName() == 'users.index')  active open  @endif">
@@ -129,14 +137,14 @@
 
                   <li class="menu-item ">
                      <a href="{{route('lottery.index')}}" class="menu-link">
-                              <div data-i18n="Create Lottery"> Lottery</div>
+                              <div data-i18n="Lottery Name"> Lottery Name</div>
                      </a>
                   </li>
 
 
                   <li class="menu-item ">
                     <a href="{{route('lottery.add_on_index')}}" class="menu-link">
-                             <div data-i18n="Lottery Set">All Lottery </div>
+                             <div data-i18n="All Lottery">All Lottery </div>
                     </a>
                  </li>
 
@@ -147,11 +155,15 @@
                  </li> --}}
 
                  @endcan
+
+                 @if (Auth::user()->type=='user')
+
                  <li class="menu-item ">
-                    <a href="{{route('lottery.my_lottery')}}" class="menu-link">
+                     <a href="{{route('lottery.my_lottery')}}" class="menu-link">
                              <div data-i18n="My Lotteries">My Lotteries </div>
                     </a>
                  </li>
+                 @endif
 
                </ul>
             </aside>

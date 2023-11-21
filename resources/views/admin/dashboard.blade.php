@@ -23,6 +23,21 @@
 
 
     @if (Auth::user()->type=='admin')
+
+    {{-- <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">Lottery For Today</div>
+            <div class="card-body">
+                @if(isset($already_lottery))
+                    <p>Already Created</p>
+                @else
+                    <button type="submit" class="btn btn-primary" >Click Me</button>
+                @endif
+            </div>
+        </div>
+    </div> --}}
+
+
     <div class="col-md-3">
         <div class="card">
             <div class="card-body">Total Users</div>

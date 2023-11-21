@@ -132,4 +132,13 @@ $(document).ready(function($){
         clearAllNumbers();
         randomNumberGenerate();
     });
+
+
+
 });
+// function myFunction() {
+
+//     var x = document.getElementById("mySelect").value;
+//     alert(x);
+
+//   }

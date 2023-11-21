@@ -14,7 +14,7 @@ use DataTables;
 use Mail;
 use Carbon\Carbon;
 use Session;
-
+use App\Models\LotterySet;
 
 class AdminController extends Controller
 {
@@ -23,6 +23,7 @@ class AdminController extends Controller
     {
         // Session::put('link', 'asas');
         //   Session::save();
+
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
 
@@ -30,8 +31,10 @@ class AdminController extends Controller
         $total_agents = User::where('type','agent')->count();
         $total_users = User::where('type','user')->count();
 
+        $already_lottery = LotterySet::whereDate('created_at',Carbon::today())->first();
 
-       return view('admin/dashboard',compact('user','total_users','total_agents','total_users_by_agents'));
+
+       return view('admin/dashboard',compact('user','total_users','total_agents','total_users_by_agents','already_lottery'));
     }
 
 

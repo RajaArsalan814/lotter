@@ -23,7 +23,7 @@
 
     <div class="dt-buttons btn-group flex-wrap">
 
-   <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_00" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser"><span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add New Agent</span></span></button>
+   <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_00" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser"><span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add New Master</span></span></button>
 </div>
 
   </div>
@@ -33,27 +33,20 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
-          <!-- <th>Email</th> -->
           <th>Phone Number</th>
           <th>Role</th>
-          <th>Total Users</th>
-          <th>Users View</th>
-          <!-- <th>Status</th> -->
-          <!-- <th>Actions</th> -->
+          {{-- <th>Users View</th> --}}
         </tr>
       </thead>
       <tbody>
-        @if(count($agents)>0)
-        @foreach($agents as $item)
+        @if(count($master)>0)
+        @foreach($master as $item)
         <tr>
           <td>{{$item->first_name}}</td>
           <td>{{$item->last_name}}</td>
-          <!-- <td>{{$item->email}}</td> -->
           <td>{{$item->phone_number}}</td>
           <td>{{$item->role_id}}</td>
-          <td>{{$item->overall_users_count}}</td>
-          <td><a href="{{route('users_get',['id'=>$item->id])}}">View</a></td>
-          <!-- <td>As</td> -->
+          {{-- <td><a href="{{route('users_get',['id'=>$item->id])}}">View</a></td> --}}
         </tr>
         @endforeach
         @endif
@@ -63,11 +56,11 @@
   <!-- Offcanvas to add new user -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
     <div class="offcanvas-header">
-      <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add Agent</h5>
+      <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add Master</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
-      <form class="" action="{{route('users.store')}}" method="POST" id="addNewUserForm" novalidate>
+      <form class="" action="{{route('master.my_store')}}" method="POST" id="addNewUserForm" novalidate>
         @csrf
         <div class="mb-3">
           <label class="form-label" for="first_name">First Name</label>

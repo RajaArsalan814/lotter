@@ -21,10 +21,9 @@
       <div class="col-md-4 user_status"></div>
     </div>
 
-    <div class="dt-buttons btn-group flex-wrap">
-
+    {{-- <div class="dt-buttons btn-group flex-wrap">
    <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_00" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser"><span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add New Agent</span></span></button>
-</div>
+    </div> --}}
 
   </div>
   <div class="card-datatable table-responsive">
@@ -33,26 +32,20 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
-          <!-- <th>Email</th> -->
           <th>Phone Number</th>
           <th>Role</th>
-          <th>Total Users</th>
-          <th>Users View</th>
-          <!-- <th>Status</th> -->
-          <!-- <th>Actions</th> -->
+          <th>Total Credit</th>
         </tr>
       </thead>
       <tbody>
-        @if(count($agents)>0)
-        @foreach($agents as $item)
+        @if(count($user_get)>0)
+        @foreach($user_get as $item)
         <tr>
           <td>{{$item->first_name}}</td>
           <td>{{$item->last_name}}</td>
-          <!-- <td>{{$item->email}}</td> -->
           <td>{{$item->phone_number}}</td>
           <td>{{$item->role_id}}</td>
-          <td>{{$item->overall_users_count}}</td>
-          <td><a href="{{route('users_get',['id'=>$item->id])}}">View</a></td>
+          <td>{{$item->total_credit}}</td>
           <!-- <td>As</td> -->
         </tr>
         @endforeach
@@ -61,7 +54,7 @@
     </table>
   </div>
   <!-- Offcanvas to add new user -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
+  {{-- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add Agent</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -130,7 +123,7 @@
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancel</button>
       </form>
     </div>
-  </div>
+  </div> --}}
 </div>
 
 @endsection

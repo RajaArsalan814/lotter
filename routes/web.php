@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\LotteryController;
+use App\Http\Controllers\Admin\MasterController;
 
 
 // For User
@@ -64,6 +65,19 @@ Route::middleware(['auth'])->prefix('admin')->group(function()
 {
     Route::resource('users', UserController::class);
     Route::resource('agent', AgentController::class);
+    Route::resource('master', MasterController::class);
+
+    Route::controller(MasterController::class)->group(function ()
+    {
+        Route::post('my_store', 'my_store')->name('master.my_store');
+    });
+
+
+    Route::controller(AgentController::class)->group(function ()
+    {
+        Route::get('users_get/{id}', 'users_get')->name('users_get');
+    });
+
     Route::resource('setting', SettingController::class);
     Route::resource('roles', RoleController::class);
 
@@ -100,11 +114,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function()
         Route::post('lottery_set_update', 'lottery_set_update')->name('lottery.lottery_set_update');
     });
 
-
 });
 
 Route::middleware(['auth','can:isUser'])->prefix('user')->group(function(){
-
     Route::controller(UController::class)->group(function () {
   });
 });
@@ -114,3 +126,8 @@ Route::get('logout', [App\Http\Controllers\HomeController::class, 'logout'])->na
 Route::get('/check',function(){
   return "asdads";
 });
+
+Route::get('cron_call_function', [App\Http\Controllers\LotteryController::class, 'cron_call_function']);
+
+
+

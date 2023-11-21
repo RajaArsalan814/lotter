@@ -114,204 +114,327 @@ class LotteryController extends Controller
         return view('admin.lottery.add_on',compact('lottery'));
     }
 
+    public function cron_call_function(){
 
-    public function add_on_store(Request $request){
-        // return $request->all();
-
-        $already_lottery = LotterySet::where('lottery_id',$request->lottery_id)->whereDate('created_at',Carbon::today())->first();
+        $already_lottery = LotterySet::whereDate('created_at',Carbon::today())->first();
         if(isset($already_lottery)){
-            return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery already created for today','type'=>'error']);
+            \Log::info("Lottery Already Created for today!");
         }else{
-        date_default_timezone_set("Asia/Karachi");
-        $dt = Carbon::now();
+            date_default_timezone_set("Asia/Karachi");
+            $dt = Carbon::now();
+            $date = $dt->toDateString();
+            $lottery_id=[1,2,3];
+            $starttime = '9:00';  // your start time
+            $endtime = '9:30';  // End time
+            $duration = '30';  // split by 30 mins
 
-        $date = $dt->toDateString();
-        $start_date = $date .' 10:00:00' ;
-        $end_date = $date .' 10:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
+            $array_of_time = array ();
+            $start_time    = strtotime ($starttime); //change to strtotime
+            $end_time      = strtotime ($endtime); //change to strtotime
 
+            $add_mins  = $duration * 60;
 
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 10:31:00' ;
-        $end_date = $date .' 10:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 11:00:00' ;
-        $end_date = $date .' 11:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 11:31:00' ;
-        $end_date = $date .' 11:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 12:00:00' ;
-        $end_date = $date .' 12:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 12:31:00' ;
-        $end_date = $date .' 12:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 13:00:00' ;
-        $end_date = $date .' 13:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 13:31:00' ;
-        $end_date = $date .' 13:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 14:00:00' ;
-        $end_date = $date .' 14:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 14:31:00' ;
-        $end_date = $date .' 14:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 15:00:00' ;
-        $end_date = $date .' 15:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 15:31:00' ;
-        $end_date = $date .' 15:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 16:00:00' ;
-        $end_date = $date .' 16:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 16:31:00' ;
-        $end_date = $date .' 16:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 17:00:00' ;
-        $end_date = $date .' 17:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 17:31:00' ;
-        $end_date = $date .' 17:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 18:00:00' ;
-        $end_date = $date .' 18:30:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-        $date = $dt->toDateString();
-        $start_date = $date .' 18:31:00' ;
-        $end_date = $date .' 18:59:00' ;
-        $lottery_set = new LotterySet;
-        $lottery_set->lottery_id = $request->lottery_id;
-        $lottery_set->start_date = $start_date;
-        $lottery_set->end_date = $end_date;
-        $lottery_set->save();
-
-
-
+            while ($start_time <= 1700578800) // loop between time
+            {
+                    $lottery_id;
+                    foreach($lottery_id as $item){
+                            $array_of_time[] = array(
+                                'start_date' => $date .' '. date("H:i:s", $start_time),
+                                'end_date' => $date .' '. date("H:i:s", $end_time),
+                                'lottery_id' => $item
+                            );
+                        }
+                        $start_time += $add_mins; // to check endtie=me
+                        $end_time += $add_mins; // to check endtie=me
+                    }
+                    LotterySet::insert($array_of_time);
+        }
     }
 
-        return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery created successfully for today','type'=>'success']);
-    }
+
+    // public function add_on_store(Request $request){
+
+    //     $already_lottery = LotterySet::where('lottery_id',$request->lottery_id)->whereDate('created_at',Carbon::today())->first();
+    //     if(isset($already_lottery)){
+    //         return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery already created for today','type'=>'error']);
+    //     }else{
+    //     date_default_timezone_set("Asia/Karachi");
+    //     $dt = Carbon::now();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 09:00:00' ;
+    //     $end_date = $date .' 09:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 09:31:00' ;
+    //     $end_date = $date .' 09:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 10:00:00' ;
+    //     $end_date = $date .' 10:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 10:31:00' ;
+    //     $end_date = $date .' 10:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 11:00:00' ;
+    //     $end_date = $date .' 11:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 11:31:00' ;
+    //     $end_date = $date .' 11:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 12:00:00' ;
+    //     $end_date = $date .' 12:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 12:31:00' ;
+    //     $end_date = $date .' 12:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 13:00:00' ;
+    //     $end_date = $date .' 13:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 13:31:00' ;
+    //     $end_date = $date .' 13:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 14:00:00' ;
+    //     $end_date = $date .' 14:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 14:31:00' ;
+    //     $end_date = $date .' 14:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 15:00:00' ;
+    //     $end_date = $date .' 15:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 15:31:00' ;
+    //     $end_date = $date .' 15:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 16:00:00' ;
+    //     $end_date = $date .' 16:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 16:31:00' ;
+    //     $end_date = $date .' 16:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 17:00:00' ;
+    //     $end_date = $date .' 17:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 17:31:00' ;
+    //     $end_date = $date .' 17:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 18:00:00' ;
+    //     $end_date = $date .' 18:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 18:31:00' ;
+    //     $end_date = $date .' 18:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 19:00:00' ;
+    //     $end_date = $date .' 19:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 19:31:00' ;
+    //     $end_date = $date .' 19:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 20:00:00' ;
+    //     $end_date = $date .' 20:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 20:31:00' ;
+    //     $end_date = $date .' 20:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 21:00:00' ;
+    //     $end_date = $date .' 21:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 21:31:00' ;
+    //     $end_date = $date .' 21:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 22:00:00' ;
+    //     $end_date = $date .' 22:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 22:31:00' ;
+    //     $end_date = $date .' 22:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 23:00:00' ;
+    //     $end_date = $date .' 23:30:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     $date = $dt->toDateString();
+    //     $start_date = $date .' 23:31:00' ;
+    //     $end_date = $date .' 23:59:00' ;
+    //     $lottery_set = new LotterySet;
+    //     $lottery_set->lottery_id = $request->lottery_id;
+    //     $lottery_set->start_date = $start_date;
+    //     $lottery_set->end_date = $end_date;
+    //     $lottery_set->save();
+
+    //     }
+
+    //     return redirect()->route('lottery.add_on_index')->with(['message'=>'Lottery created successfully for today','type'=>'success']);
+    // }
 
     public function add_on_index()
     {
