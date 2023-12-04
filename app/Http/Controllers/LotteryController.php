@@ -115,7 +115,6 @@ class LotteryController extends Controller
     }
 
     public function cron_call_function(){
-
         $already_lottery = LotterySet::whereDate('created_at',Carbon::today())->first();
         if(isset($already_lottery)){
             \Log::info("Lottery Already Created for today!");
@@ -134,9 +133,10 @@ class LotteryController extends Controller
 
             $add_mins  = $duration * 60;
 
-            while ($start_time <= 1700578800) // loop between time
+            while ($start_time <= 1701709200) // loop between time
             {
-                    $lottery_id;
+
+                                    $lottery_id;
                     foreach($lottery_id as $item){
                             $array_of_time[] = array(
                                 'start_date' => $date .' '. date("H:i:s", $start_time),
@@ -448,9 +448,14 @@ class LotteryController extends Controller
         // ->groupBy('id')
         // return
         // return   LotteryPlace::withcount(['users'])->get();
+
         $lottery = LotterySet::withcount(['lottery','lottery_place as total_users' => function ($query) {
 
             $query->select(DB::raw('count(distinct(user_id))'));
+
+        },'lottery_place as total_quantity' => function ($query) {
+
+            $query->select(DB::raw('sum(quantity)'));
 
         }])->orderBy('id','DESC')->get();
 
@@ -459,19 +464,21 @@ class LotteryController extends Controller
 
     public function lottery_set_edit($id){
 
+        // return LotteryPlace::where('lottery_set_id',$id)->orderBy('quantity')->first();
         $lottery_set = LotterySet::where('id',$id)->first();
         return view('admin.lottery.lottery_edit',compact('lottery_set'));
     }
 
     public function lottery_set_update(Request $request){
-        // return $request->all();
+        //  return $request->all();
 
-        LotterySet::where('id',$request->lottery_set_id)->update(['number_win'=>$request->lottery_number_select]);
+        $data =  LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->orderBy('quantity')->first();
 
-        $lottery_win_user = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('number_select',$request->lottery_number_select)->get();
+        LotterySet::where('id',$request->lottery_set_id)->update(['number_win'=>$data->number_select]);
+
+        $lottery_win_user = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->where('number_select',$data->number_select)->get();
 
         $participant_users = LotteryPlace::where('lottery_set_id',$request->lottery_set_id)->orderBy('id','DESC')->get();
-
 
         foreach($participant_users as $key=>$desc){
             if($desc->lottery_id=='3'){

@@ -107,7 +107,7 @@ class AgentController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('role_id'));
 
-        return redirect()->back()->with(['message'=>'User created successfully','type'=>'success']);
+        return redirect()->back()->with(['message'=>'Created successfully','type'=>'success']);
     }
 
     /**
@@ -163,7 +163,7 @@ class AgentController extends Controller
         $user = User::find($id);
         $user->update($input);
         return redirect()->back()
-                ->with(['message'=>'User update successfully','type'=>'success']);
+                ->with(['message'=>'Update successfully','type'=>'success']);
     }
 
     /**
@@ -176,7 +176,7 @@ class AgentController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-                        ->with(['message'=>'User delete successfully','type'=>'success']);
+                        ->with(['message'=>'Delete successfully','type'=>'success']);
     }
 
     public function users_get($id)

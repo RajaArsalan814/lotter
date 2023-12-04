@@ -95,6 +95,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function()
           Route::get('change-status', 'change_status')->name('change-status');
           Route::get('list', 'list')->name('list');
           route::post('profile-update','profileUpdate')->name('profile-update');
+          Route::post('who_win','who_win')->name('who_win');
     });
 
 

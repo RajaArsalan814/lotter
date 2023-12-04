@@ -35,6 +35,7 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Total Users</th>
+          <th>Total Qty</th>
           <th>Win</th>
           <th>Choose Winner</th>
         </tr>
@@ -48,17 +49,8 @@
           <td>{{$item->lottery->name}}</td>
           <td>{{$item->start_date}}</td>
           <td>{{$item->end_date}}</td>
-          {{-- @php
-              $property_types = array();
-          @endphp
-            @if ((!empty($item->lottery_place)))
-            @foreach ($item->lottery_place as $sub)
-            <td>
-                {{$sub->user_id->count()}}
-            </td>
-            @endforeach
-            @endif --}}
             <td>{{$item->total_users}}</td>
+            <td>{{$item->total_quantity}}</td>
           <td>{{$item->number_win}}</td>
           {{-- @if($item->number_win==null) --}}
           <td><a href="{{route('lottery.lottery_set_edit',['id'=>$item->id])}}">Edit</a></td>

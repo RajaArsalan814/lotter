@@ -116,43 +116,42 @@
                   </li>
 
 
-                  <li class="menu-item @if (Route::currentRouteName() == 'master.index' )  active open  @endif">
+                <li class="menu-item @if (Route::currentRouteName() == 'master.index' )  active open  @endif">
                     @if (Auth::user()->type=='admin')
                              <a href="{{route('master.index')}}" class="menu-link">
                                 <div data-i18n="Master">Master</div>
                              </a>
                     @endif
-                    </li>
+                </li>
 
 
-                  <li class="menu-item @if ( Route::currentRouteName() == 'users.index')  active open  @endif">
-                  @can('user-list')
-                     <a href="{{route('users.index')}}" class="menu-link">
-                              <div data-i18n="User">User</div>
-                     </a>
-                  @endcan
-                  </li>
+                <li class="menu-item @if ( Route::currentRouteName() == 'users.index')  active open  @endif">
+                    @can('user-list')
+                        <a href="{{route('users.index')}}" class="menu-link">
+                            <div data-i18n="User">User</div>
+                        </a>
+                    @endcan
+                </li>
+                @if (Auth::user()->type=='master')
+                <li class="menu-item ">
+                    <a href="{{route('lottery.add_on_index')}}" class="menu-link">
+                            <div data-i18n="All Lottery">All Lottery </div>
+                    </a>
+                </li>
+                @endif
 
                   @can('role-list')
 
-                  <li class="menu-item ">
-                     <a href="{{route('lottery.index')}}" class="menu-link">
-                              <div data-i18n="Lottery Name"> Lottery Name</div>
-                     </a>
-                  </li>
-
-
-                  <li class="menu-item ">
-                    <a href="{{route('lottery.add_on_index')}}" class="menu-link">
-                             <div data-i18n="All Lottery">All Lottery </div>
-                    </a>
-                 </li>
-
-                 {{-- <li class="menu-item ">
-                    <a href="{{route('lottery.all_lotteries')}}" class="menu-link">
-                             <div data-i18n="All Lotteries">All Lotteries </div>
-                    </a>
-                 </li> --}}
+                    <li class="menu-item ">
+                        <a href="{{route('lottery.index')}}" class="menu-link">
+                                <div data-i18n="Lottery Name"> Lottery Name</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="{{route('lottery.add_on_index')}}" class="menu-link">
+                                <div data-i18n="All Lottery">All Lottery </div>
+                        </a>
+                    </li>
 
                  @endcan
 
@@ -164,6 +163,15 @@
                     </a>
                  </li>
                  @endif
+
+                 {{-- <li class="menu-item @if ( Route::currentRouteName() == 'users.index')  active open  @endif">
+                    @can('user-list')
+                        <a href="{{route('users.index')}}" class="menu-link">
+                            <div data-i18n="User">User</div>
+                        </a>
+                    @endcan
+                </li> --}}
+
 
                </ul>
             </aside>

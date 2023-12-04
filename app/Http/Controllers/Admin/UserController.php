@@ -29,11 +29,11 @@ class UserController extends Controller
          $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:user-delete', ['only' => ['destroy']]);
 
-
     }
 
     public function index()
     {
+
         $agents = User::orderBy('id','DESC')->where('type','user')->where('id','!=',auth()->user()->id)->get();
 
         if(auth()->user()->type == 'agent')
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         }else{
 
-            $agents = User::orderBy('id','DESC')->where('type','user')->where('id','!=',auth()->user()->id)->get();
+            $agents = User::orderBy('id','DESC')->where('type','user')->where('role_id','Users')->where('id','!=',auth()->user()->id)->get();
             $roles = Role::where('name','Users')->pluck('name')->all();
         }
 

@@ -89,11 +89,12 @@ class MasterController extends Controller
          $user->first_name= $request->first_name;
          $user->last_name= $request->last_name;
          $user->phone_number= $request->phone_number;
-         $user->role_id= 'Master';
+         $user->role_id= 'master';
          $user->type= 'master';
          $input['password'] = Hash::make($request->password);
          $user->password=$input['password'];
          $user->save();
+         $user->assignRole($request->input('role_id'));
         // $input = $request->except(['_token', 'profile','password_confirm'],$request->all());
         //  if($request->role_id == 'Master'){
         //     $input['type'] ='master';
@@ -109,7 +110,6 @@ class MasterController extends Controller
     //    return  $request->input('role_id');
         // $input['user_id'] = auth()->user()->id;
         // $user = User::create($input);
-        // $user->assignRole($request->input('role_id'));
 
         return redirect()->back()->with(['message'=>'Master created successfully','type'=>'success']);
     }

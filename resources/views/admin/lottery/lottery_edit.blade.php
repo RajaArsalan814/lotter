@@ -63,7 +63,6 @@
                                                                    <option value="62">62</option>
                                                                    <option value="64">64</option>
                                                                    <option value="65">65</option>
-                                                                   <option value="66">66</option>
 
                                                                    @else
                                                                    <option value="1">1</option>
