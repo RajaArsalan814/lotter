@@ -17,6 +17,7 @@ use Session;
 use App\Models\LotterySet;
 use App\Models\LotteryPlace;
 use App\Models\Setting;
+use App\Http\Controllers\LotteryController;
 
 
 class AdminController extends Controller
@@ -24,46 +25,6 @@ class AdminController extends Controller
 
    public function dashboard(Request $request)
     {
-
-        $currentDatetime = now();
-// return
-
-//         LotteryPlace::groupBy('number_select','lottery_set_id')
-//         ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
-//         ->orderBy('total_quantity','DESC')->take(1)
-//         ->whereDate('created_at', now()->toDateString())
-//         ->first();
-        // return
-        $i=2;
-        // run this query in cron after every half hour
-        if($i=='1'){
-            //  Highest
-            $lottery_set = LotterySet::with(['lottery_place' => function($query){
-                $query
-                ->groupBy('lottery_set_id','number_select')
-                ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
-                ->orderByDesc('total_quantity')->take(1);
-            }])->has('lottery_place')->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
-            ->where('end_date','>', $currentDatetime)
-            ->first();
-        }elseif($i=='2'){
-            // Second Highest
-            $lottery_set = LotterySet::with(['lottery_place' => function($query){
-                $query
-                ->groupBy('lottery_set_id','number_select')
-                ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
-                ->orderByDesc('total_quantity')->skip(1)->take(1);
-            }])->has('lottery_place')->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
-            ->where('end_date','>', $currentDatetime)
-            ->first();
-        }else{
-            return "no";
-        }
-
-        foreach($lottery_set->lottery_place as $item){
-             $number_win =  $item->number_select;
-        }
-        return $number_win;
 
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
@@ -136,5 +97,105 @@ class AdminController extends Controller
    {
       $users = User::get();
       return view("admin.list2",compact('users'));
+   }
+
+   public function cron_call_lottery_win(){
+
+        $currentDatetime = now();
+        // run this query in cron after every half hour
+        $setting = Setting::first();
+        $i=$setting->win;
+        switch($i){
+
+            case 'highest':
+
+                 $lottery_set = LotterySet::has('lottery_place')->with(['lottery_place' => function ($query) {
+                    $query
+                    ->groupBy('lottery_set_id','number_select')
+                    ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
+                    ->orderByDesc('total_quantity')->take(1);
+                }])->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
+                ->where('end_date','>', $currentDatetime)
+                ->first();
+            break;
+
+            case 'second_highest':
+
+                $lottery_set = LotterySet::has('lottery_place')->with(['lottery_place' => function ($query) {
+                    $query
+                    ->groupBy('lottery_set_id','number_select')
+                    ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
+                    ->orderByDesc('total_quantity')->skip(1)->take(1);
+                }])->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
+                ->where('end_date','>', $currentDatetime)
+                ->first();
+            break;
+
+            case 'third_highest':
+
+                $lottery_set = LotterySet::has('lottery_place')->with(['lottery_place' => function ($query) {
+                    $query
+                    ->groupBy('lottery_set_id','number_select')
+                    ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
+                    ->orderByDesc('total_quantity')->skip(2)->take(1);
+                }])->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
+                ->where('end_date','>', $currentDatetime)
+                ->first();
+            break;
+
+            case 'fourth_highest':
+
+                $lottery_set = LotterySet::has('lottery_place')->with(['lottery_place' => function ($query) {
+                    $query
+                    ->groupBy('lottery_set_id','number_select')
+                    ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
+                    ->orderByDesc('total_quantity')->skip(3)->take(1);
+                }])->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
+                ->where('end_date','>', $currentDatetime)
+                ->first();
+            break;
+
+            case 'second_lowest':
+
+                $lottery_set = LotterySet::has('lottery_place')->with(['lottery_place' => function ($query) {
+                    $query
+                    ->groupBy('lottery_set_id','number_select')
+                    ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
+                    ->orderBy('total_quantity')->skip(1)->take(1);
+                }])->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
+                ->where('end_date','>', $currentDatetime)
+                ->first();
+            break;
+
+            case 'lowest':
+
+                $lottery_set = LotterySet::has('lottery_place')->with(['lottery_place' => function ($query) {
+                    $query
+                    ->groupBy('lottery_set_id','number_select')
+                    ->select('lottery_set_id','number_select', DB::raw('SUM(quantity) as total_quantity'))
+                    ->orderBy('total_quantity')->take(1);
+                }])->where('number_win',NULL)->whereDate('created_at', now()->toDateString())
+                ->where('end_date','>', $currentDatetime)
+                ->first();
+            break;
+
+            case 'no_win':
+            break;
+
+            default:
+                echo "no";
+        }
+        if(!empty($lottery_set->lottery_place) AND isset($lottery_set)){
+            foreach($lottery_set->lottery_place as $item){
+                $number_win =  $item->number_select;
+                $lottery_set_id =  $item->lottery_set_id;
+            }
+
+            $number_win;
+            $lottery_set_id;
+            $call_function = new LotteryController();
+            $call_function->lottery_set_update($lottery_set_id,$number_win);
+        }
+        // Query end for cron job which will be use for user win
    }
 }

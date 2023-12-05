@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
 
      protected $commands = [
         Commands\LotteryCron::class,
+        Commands\win_lottery::class
     ];
 
 
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('lottery:cron')
         ->daily();
+        $schedule->command('win:lottery')
+        ->cron('*/45 * * * *');
+
     }
 
     /**

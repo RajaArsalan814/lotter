@@ -3,16 +3,17 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Http\Controllers\LotteryController;
+use App\Models\Setting;
+use App\Http\Controllers\Admin\AdminController;
 
-class LotteryCron extends Command
+class win_lottery extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'lottery:cron';
+    protected $signature = 'win:lottery';
 
     /**
      * The console command description.
@@ -30,17 +31,11 @@ class LotteryCron extends Command
     {
         // return Command::SUCCESS;
 
-        $classA = new LotteryController();
-        $classA->cron_call_function();
-        \Log::info("Cron is working fine for lotteryset!");
-        // LotteryController::cron_call_function();
+        $classA = new AdminController();
+        $classA->cron_call_lottery_win();
+        \Log::info('Cron Job Done for lottery win');
 
-        /*
-
-           Write your database logic we bellow:
-
-           Item::create(['name'=>'hello new']);
-
-        */
+        // $setting = Setting::first();
+        // $i=$setting->win;
     }
 }

@@ -61,38 +61,38 @@
                         @csrf
                         <select name="win" id="" class="form-control">
                             <option selected disabled>Select Winner</option>
-                            <option value="1"
-                            @if ($setting->win=='1')
+                            <option value="highest"
+                            @if ($setting->win=='highest')
                                 selected
                             @endif
                             >Highest</option>
-                            <option value="2"
-                            @if ($setting->win=='2')
+                            <option value="second_highest"
+                            @if ($setting->win=='second_highest')
                             selected
                             @endif
                         >Second Highest</option>
-                            <option value="3"
-                            @if ($setting->win=='3')
+                            <option value="third_highest"
+                            @if ($setting->win=='third_highest')
                             selected
                         @endif
                         >Third  Highest</option>
-                            <option value="4"
-                            @if ($setting->win=='4')
+                            <option value="fourth_highest"
+                            @if ($setting->win=='fourth_highest')
                             selected
                         @endif
                             >Fourth Highest</option>
-                            <option value="5"
-                            @if ($setting->win=='5')
+                            <option value="second_lowest"
+                            @if ($setting->win=='second_lowest')
+                            selected
+                            @endif
+                            >Second Lowest </option>
+                            <option value="lowest"
+                            @if ($setting->win=='lowest')
                             selected
                         @endif
                         >Lowest </option>
-                            <option value="6"
-                            @if ($setting->win=='6')
-                            selected
-                        @endif
-                        >Second Lowest </option>
-                            <option value="0"
-                            @if ($setting->win=='0')
+                            <option value="no_win"
+                            @if ($setting->win=='no_win')
                                 selected
                             @endif
                             >No Win</option>

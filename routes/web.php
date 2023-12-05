@@ -129,6 +129,7 @@ Route::get('/check',function(){
 });
 
 Route::get('cron_call_function', [App\Http\Controllers\LotteryController::class, 'cron_call_function']);
+Route::get('cron_call_lottery_win', [App\Http\Controllers\Admin\AdminController::class, 'cron_call_lottery_win']);
 
 
 
