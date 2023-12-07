@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Role;
 use DB;
 
 use Illuminate\Support\Arr;
-
+use App\Models\UserTransaction;
 
 
 class UserController extends Controller
@@ -209,5 +209,77 @@ class UserController extends Controller
     //      $user = User::find($id);
     //      return view('admin.user.edit',compact('user'));
     // }
+
+    public function user_amount($id){
+
+        $user = User::where('id',$id)->first();
+        $agent_id = Auth::user()->id;
+        $user_transaction = UserTransaction::with('user','agent')->where('agent_id',$agent_id)->get();
+        return view('admin.user.user_amount',compact('user','user_transaction'));
+    }
+
+    public function widhdraw_amount(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'amount' => 'integer',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with(['message'=>'amount should be number','type' => 'error']);
+        }
+
+        $user = User::where('id',$request->user_id)->first();
+        if($user->total_credit >= $request->amount){
+            $agent_id = auth()->user()->id;
+            $status = 'widhdraw';
+            $user_transaction = new UserTransaction;
+            $user_transaction->agent_id = $agent_id;
+            $user_transaction->user_id = $request->user_id;
+            $user_transaction->amount = $request->amount;
+            $user_transaction->status = $status;
+            $user_transaction->save();
+
+            $user = User::where('id',$request->user_id)->first();
+            $amount = $user->total_credit - $request->amount;
+            $user->total_credit = $amount;
+            $user->save();
+
+            return redirect()->back()
+            ->with(['message'=>'Amount Widhdraw successfully','type'=>'success']);
+        }else{
+            return redirect()->back()
+            ->with(['message'=>'Widhdraw Amount cannot be greater then Total Amount','type'=>'success']);
+        }
+
+    }
+
+    public function deposit_amount(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'amount' => 'integer',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with(['message'=>'amount should be number','type' => 'error']);
+        }
+
+        $agent_id = auth()->user()->id;
+        $status = 'deposit';
+        $user_transaction = new UserTransaction;
+        $user_transaction->agent_id = $agent_id;
+        $user_transaction->user_id = $request->user_id;
+        $user_transaction->amount = $request->amount;
+        $user_transaction->status = $status;
+        $user_transaction->save();
+
+        $user = User::where('id',$request->user_id)->first();
+        $amount = $user->total_credit + $request->amount;
+        $user->total_credit = $amount;
+        $user->save();
+
+        return redirect()->back()
+        ->with(['message'=>'Amount Deposit successfully','type'=>'success']);
+    }
+
 
 }

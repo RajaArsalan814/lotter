@@ -34,6 +34,7 @@
           <th>Phone Number</th>
           <th>Role</th>
           <th>Total Credit</th>
+          <th>User Amount</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -46,6 +47,7 @@
           <td>{{$item->phone_number}}</td>
           <td>{{$item->role_id}}</td>
           <td>{{$item->total_credit ? $item->total_credit  : '0' }}</td>
+          <td><a href="{{route('user_amount',['id'=>$item->id])}}">Cick me</a></td>
           <td><a href="{{route('user_edit',['id'=>$item->id])}}">Edit</a></td>
         </tr>
         @endforeach

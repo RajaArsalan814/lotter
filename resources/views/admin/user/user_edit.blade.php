@@ -51,7 +51,7 @@
 
                                                     <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label> Id</label>
+                                                        <label> Phone Number</label>
                                                         <div class="controls">
                                                             <input type="text"  class="form-control" required data-validation-required-message="This field is required" value="{{$user->phone_number}} " disabled>
                                                         </div>

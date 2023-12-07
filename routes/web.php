@@ -85,6 +85,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function()
     {
         Route::get('user_edit/{id}', 'user_edit')->name('user_edit');
         Route::post('user_update', 'user_update')->name('user_update');
+        Route::get('user_amount/{id}', 'user_amount')->name('user_amount');
+        Route::post('widhdraw_amount', 'widhdraw_amount')->name('widhdraw_amount');
+        Route::post('deposit_amount', 'deposit_amount')->name('deposit_amount');
     });
 
 
@@ -113,6 +116,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function()
         Route::get('all_lotteries', 'all_lotteries')->name('lottery.all_lotteries');
         Route::get('lottery_set_edit/{id}', 'lottery_set_edit')->name('lottery.lottery_set_edit');
         Route::post('lottery_set_update', 'lottery_set_update')->name('lottery.lottery_set_update');
+        Route::get('view_users/{id}', 'view_users')->name('lottery.view_users');
     });
 
 });

@@ -36,8 +36,9 @@
           <th>End Date</th>
           <th>Total Users</th>
           <th>Total Qty</th>
-          <th>Win</th>
-          <th>Choose Winner</th>
+          {{-- <th>Win</th> --}}
+          {{-- <th>Choose Winner</th> --}}
+          <th>View Users</th>
         </tr>
       </thead>
       <tbody>
@@ -51,9 +52,10 @@
           <td>{{$item->end_date}}</td>
             <td>{{$item->total_users}}</td>
             <td>{{$item->total_quantity}}</td>
-          <td>{{$item->number_win}}</td>
+          {{-- <td>{{$item->number_win}}</td> --}}
           {{-- @if($item->number_win==null) --}}
-          <td><a href="{{route('lottery.lottery_set_edit',['id'=>$item->id])}}">Edit</a></td>
+          {{-- <td><a href="{{route('lottery.lottery_set_edit',['id'=>$item->id])}}">Edit</a></td> --}}
+          <td><a href="{{route('lottery.view_users',['id'=>$item->id])}}">View Users</a></td>
           {{-- @endif --}}
         </tr>
         @endforeach

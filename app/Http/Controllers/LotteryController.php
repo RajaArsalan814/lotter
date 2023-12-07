@@ -440,16 +440,6 @@ class LotteryController extends Controller
     public function add_on_index()
     {
 
-        // lottery_set_id
-        //
-// return
-//         DB::table('lottery_places')
-//         ->count(DB::raw('DISTINCT user_id'));
-        // ->get();
-        // ->groupBy('id')
-        // return
-        // return   LotteryPlace::withcount(['users'])->get();
-
         $lottery = LotterySet::withcount(['lottery','lottery_place as total_users' => function ($query) {
 
             $query->select(DB::raw('count(distinct(user_id))'));
@@ -468,6 +458,12 @@ class LotteryController extends Controller
         // return LotteryPlace::where('lottery_set_id',$id)->orderBy('quantity')->first();
         $lottery_set = LotterySet::where('id',$id)->first();
         return view('admin.lottery.lottery_edit',compact('lottery_set'));
+    }
+
+    public function view_users($id){
+
+        $all_users = LotteryPlace::with('users','lottery')->select('lottery_id','user_id',DB::raw('SUM(quantity) as total_quantity'))->where('lottery_set_id',$id)->groupby('user_id','lottery_id')->get();
+        return view('admin.lottery.view_users',compact('all_users'));
     }
 
     public function lottery_set_update($lottery_set_id,$number_win){

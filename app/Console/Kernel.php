@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('lottery:cron')
         ->daily();
         $schedule->command('win:lottery')
-        ->cron('*/45 * * * *');
+        ->daily();
 
     }
 
